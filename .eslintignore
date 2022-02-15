@@ -1,0 +1,7 @@
+.eslintrc.js
+/tests
+/config
+node_modules
+dist
+logs
+coverage

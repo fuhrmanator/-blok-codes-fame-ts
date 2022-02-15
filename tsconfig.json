@@ -1,0 +1,39 @@
+{
+    "compilerOptions": {
+        "target": "es2019",
+        "module": "commonjs",
+        "outDir": "./dist/",
+        "declaration": true,
+        "typeRoots": [
+            "./node_modules/@types",
+            "./types"
+        ],
+        "importHelpers": true,
+        "moduleResolution": "node",
+        "removeComments": true,
+        "sourceMap": true,
+        "noImplicitAny": false,
+        "noLib": false,
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true,
+        "noUnusedLocals": true,
+        "strict": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "strictNullChecks": false,
+        "lib": [
+            "esnext",
+            "es2019"
+        ]
+    },
+    "include": [
+        "app/**/*",
+        "config/*"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

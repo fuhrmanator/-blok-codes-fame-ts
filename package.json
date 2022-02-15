@@ -1,0 +1,150 @@
+{
+    "name": "@blok-codes/fame-ts",
+    "version": "1.0.0",
+    "description": "convert typescript meta-model from json to an api",
+    "author": "Jude Seide <jude.seide@gmail.com> (https://www.linkedin.com/in/judeseide/)",
+    "homepage": "https://github.com/blok-codes/-blok-codes-fame-ts#readme",
+    "license": "GPL-3.0-or-later",
+    "private": false,
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:blok-codes/-blok-codes-fame-ts.git"
+    },
+    "bugs": {
+        "url": "https://github.com/blok-codes/-blok-codes-fame-ts/issues"
+    },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com/"
+    },
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "bin": {
+        "fame-ts": "./bin/run"
+    },
+    "files": [
+        "/bin",
+        "/dist",
+        "/npm-shrinkwrap.json",
+        "/oclif.manifest.json"
+    ],
+    "scripts": {
+        "build": "shx rm -rf dist && tsc -b",
+        "commit": "git-cz",
+        "cover": "yarn cover:unit && yarn cover:report",
+        "cover:report": "nyc --reporter lcov --reporter clover --reporter text --report-dir tests/coverage/all report",
+        "cover:unit": "nyc --no-clean --reporter text yarn test",
+        "format": "prettier --write 'app/{,**/}*.ts' 'tests/{,**/}*.ts'",
+        "lint": "eslint './{app,tests}/**/*.ts'",
+        "lint:fix": "eslint --fix './{app,tests}/**/*.ts'",
+        "postpack": "shx rm -f oclif.manifest.json",
+        "posttest": "yarn lint",
+        "prepack": "yarn build && oclif manifest && oclif readme",
+        "prepare": "yarn build",
+        "semantic-release": "semantic-release --branches main",
+        "test": "NODE_ENV=test mocha --require ts-node/register --bail --recursive ./tests/{,**/,**/**/,}*.ts"
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.ts": [
+            "yarn format",
+            "yarn lint:fix"
+        ]
+    },
+    "nyc": {
+        "all": true,
+        "exclude": [
+            "types/index.d.ts",
+            "app/index.ts"
+        ],
+        "extension": [
+            ".ts"
+        ],
+        "include": [
+            "app/*.ts",
+            "app/**/*.ts"
+        ],
+        "report-dir": "./tests/coverage/all",
+        "reporter": [
+            "json",
+            "text",
+            "lcov"
+        ],
+        "require": [
+            "ts-node/register"
+        ]
+    },
+    "oclif": {
+        "bin": "fame-ts",
+        "dirname": "fame-ts",
+        "commands": "./dist/commands",
+        "plugins": [
+            "@oclif/plugin-autocomplete",
+            "@oclif/plugin-help",
+            "@oclif/plugin-not-found"
+        ],
+        "topicSeparator": " ",
+        "topics": {}
+    },
+    "dependencies": {
+        "@oclif/core": "^1.3.4",
+        "@oclif/plugin-autocomplete": "^1.2.0",
+        "@oclif/plugin-help": "^5.1.11",
+        "@oclif/plugin-not-found": "^2.3.1",
+        "config": "^3.3.7",
+        "dotenv": "^16.0.0",
+        "inversify": "^6.0.1",
+        "lodash": "^4.17.21",
+        "quicktype": "^15.0.260",
+        "reflect-metadata": "^0.1.13",
+        "ts-morph": "^13.0.3",
+        "type-fest": "^2.11.2",
+        "typescript": "^4.5.5",
+        "winston": "^3.6.0",
+        "winston-daily-rotate-file": "^4.6.1"
+    },
+    "devDependencies": {
+        "@oclif/test": "^2.1.0",
+        "@types/chai": "^4.3.0",
+        "@types/chai-spies": "^1.0.3",
+        "@types/mocha": "^9.1.0",
+        "@types/node": "^17.0.18",
+        "@types/sinon": "^10.0.11",
+        "@typescript-eslint/eslint-plugin": "^5.12.0",
+        "@typescript-eslint/parser": "^5.12.0",
+        "chai": "^4.3.6",
+        "chai-spies": "^1.0.0",
+        "cz-conventional-changelog": "^3.3.0",
+        "eslint": "^8.9.0",
+        "eslint-config-oclif": "^4.0.0",
+        "eslint-config-oclif-typescript": "^1.0.2",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-mocha": "^10.0.3",
+        "eslint-plugin-prettier": "^4.0.0",
+        "eslint-plugin-simple-import-sort": "^7.0.0",
+        "globby": "^13.1.1",
+        "husky": "^7.0.4",
+        "lint-staged": "^12.3.4",
+        "mocha": "^9.2.0",
+        "nyc": "^15.1.0",
+        "oclif": "^2.4.4",
+        "prettier": "^2.5.1",
+        "semantic-release": "^19.0.2",
+        "shx": "^0.3.4",
+        "sinon": "^13.0.1",
+        "ts-node": "^10.5.0",
+        "tsdx": "^0.14.1",
+        "tslib": "^2.3.1"
+    },
+    "engines": {
+        "node": ">=16"
+    }
+}
