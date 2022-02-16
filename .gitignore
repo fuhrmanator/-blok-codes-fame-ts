@@ -17,3 +17,6 @@ dist/
 
 # node
 node_modules/
+
+# temporarily blocking github actions
+.github/
