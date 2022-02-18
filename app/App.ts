@@ -1,7 +1,6 @@
 import { Container } from 'inversify';
 import { Logger } from 'winston';
 
-import { Registry } from './Registry';
 import { ProcessHandler } from './Utils/ProcessHandler';
 
 export class App {
@@ -10,24 +9,17 @@ export class App {
 
     private logger: Logger;
 
-    public readonly run = async (): Promise<void> => {
-        await this.init();
-        await this.start();
-    };
-
-    private readonly init = async (): Promise<void> => {
-        this.container = await Registry.getContainer();
+    constructor(container: Container) {
+        this.container = container;
 
         this.logger = this.container.get<Logger>('Logger');
-        this.handler = this.container.get<ProcessHandler>('ErrorHandler');
-    };
+        this.handler = this.container.get<ProcessHandler>('ProcessHandler');
+    }
 
-    private readonly start = async (): Promise<void> => {
+    public readonly start = (): void => {
         this.logger.info('🚀 Starting application...');
 
         this.handler.handleErrors();
         this.handler.handleShutdown();
-
-        // todo: start application - use DI and cli
     };
 }

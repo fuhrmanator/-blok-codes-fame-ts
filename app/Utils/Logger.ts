@@ -1,23 +1,23 @@
-import { addColors, config as system, createLogger, format, Logger, transports } from 'winston';
-import DailyRotateFile from 'winston-daily-rotate-file';
 import { TransformableInfo } from 'logform';
+import { addColors, config, createLogger, format, Logger, transports } from 'winston';
+import DailyRotateFile from 'winston-daily-rotate-file';
 
-import { IConfig, levels } from './Config';
+import { levels, Settings } from './Settings';
 
 const { align, combine, timestamp, colorize, printf } = format;
 
 const formatter = (info: TransformableInfo): string => `${info.timestamp} ${info.level}: ${info.message}`;
 
-export const buildLogger = (config: IConfig): Logger => {
-    const options = config.getTyped('log');
+export const buildLogger = (settings: Settings): Logger => {
+    const options = settings.getTyped('log');
     const rotation = options.rotation;
 
     const logger = createLogger({
-        defaultMeta: config.getTyped('app'),
+        defaultMeta: settings.getTyped('app'),
         format: combine(timestamp({ format: 'YYYY-MM-DD HH:mm:ss' })),
         handleExceptions: true,
         level: options.level,
-        levels: system.syslog.levels,
+        levels: config.syslog.levels,
         transports: [
             new transports.Console({
                 format: combine(align(), printf(formatter), colorize({ all: true })),
@@ -28,7 +28,7 @@ export const buildLogger = (config: IConfig): Logger => {
         ],
     });
 
-    addColors(system.syslog.colors);
+    addColors(config.syslog.colors);
 
     return logger;
 };

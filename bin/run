@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+const run = require('../dist/app/index.js').run;
+run().then(require('@oclif/core/flush')).catch(require('@oclif/core/handle'));
+

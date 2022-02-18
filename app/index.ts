@@ -1,8 +1,8 @@
-import 'reflect-metadata';
 import { App } from './App';
+import { kernel } from './Kernel';
 
-const app = new App();
+const app = new App(kernel);
 
-app.run().then(() => {
-    console.log('\x1b[36m%s\x1b[0m', 'Application is running');
-});
+app.start();
+
+export { run } from '@oclif/core';

@@ -9,6 +9,14 @@ module.exports = {
         sourceType: 'module',
         project: './tsconfig.json',
     },
+    plugins: [
+        '@typescript-eslint',
+        'import',
+        'mocha',
+        'oclif',
+        'prettier',
+        'simple-import-sort',
+    ],
     rules: {
         '@typescript-eslint/array-type': [
             'error',
@@ -147,5 +155,10 @@ module.exports = {
                 'semi': true,
             },
         ],
+        'simple-import-sort/imports': 'error',
+        'simple-import-sort/exports': 'error',
+        'import/first': 'error',
+        'import/newline-after-import': 'error',
+        'import/no-duplicates': 'error',
     },
 };

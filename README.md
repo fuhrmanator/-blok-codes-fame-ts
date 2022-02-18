@@ -18,10 +18,8 @@ Convert typescript meta-model from json to an api
 $ npm install -g @blok-codes/fame-ts
 $ fame-ts COMMAND
 running command...
-
 $ fame-ts (--version)
-@blok-codes/fame-ts/0.0.0 linux-x64 node-v16.7.0
-
+@blok-codes/fame-ts/1.0.0 linux-x64 node-v16.7.0
 $ fame-ts --help [COMMAND]
 USAGE
   $ fame-ts COMMAND
@@ -31,28 +29,55 @@ USAGE
 
 # Commands
 <!-- commands -->
-* [`fame-ts hello PERSON`](#fame-ts-hello-person)
+* [`fame-ts autocomplete [SHELL]`](#fame-ts-autocomplete-shell)
+* [`fame-ts help [COMMAND]`](#fame-ts-help-command)
 
-## `fame-ts hello PERSON`
+## `fame-ts autocomplete [SHELL]`
 
-Say hello
+display autocomplete installation instructions
 
 ```
 USAGE
-  $ fame-ts hello [PERSON] -f <value>
+  $ fame-ts autocomplete [SHELL] [-r]
 
 ARGUMENTS
-  PERSON  Person to say hello to
+  SHELL  shell type
 
 FLAGS
-  -f, --from=<value>  (required) Whom is saying hello
+  -r, --refresh-cache  Refresh cache (ignores displaying instructions)
 
 DESCRIPTION
-  Say hello
+  display autocomplete installation instructions
 
 EXAMPLES
-  $ oex hello friend --from oclif
-  hello friend from oclif! (./app/commands/hello/index.ts)
+  $ fame-ts autocomplete
+
+  $ fame-ts autocomplete bash
+
+  $ fame-ts autocomplete zsh
+
+  $ fame-ts autocomplete --refresh-cache
 ```
 
+_See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v1.2.0/src/commands/autocomplete/index.ts)_
+
+## `fame-ts help [COMMAND]`
+
+Display help for fame-ts.
+
+```
+USAGE
+  $ fame-ts help [COMMAND] [-n]
+
+ARGUMENTS
+  COMMAND  Command to show help for.
+
+FLAGS
+  -n, --nested-commands  Include all nested commands in the output.
+
+DESCRIPTION
+  Display help for fame-ts.
+```
+
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.11/src/commands/help.ts)_
 <!-- commandsstop -->

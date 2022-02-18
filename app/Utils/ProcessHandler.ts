@@ -1,13 +1,13 @@
 import { inject, injectable } from 'inversify';
 import { Logger } from 'winston';
 
-import { IConfig } from './Config';
+import { Settings } from './Settings';
 
 @injectable()
 export class ProcessHandler {
     constructor(
-        @inject('Config') private readonly config: IConfig,
-        @inject('Logger') private readonly logger: Logger
+        @inject('Logger') private readonly logger: Logger,
+        @inject('Settings') private readonly settings: Settings
     ) {}
 
     public readonly handleErrors = (): void => {
@@ -36,7 +36,7 @@ export class ProcessHandler {
 
     private readonly shutdown = async (): Promise<void> => {
         this.logger.info('🛑 Shutting down application...');
-        const timeout = this.config.getTyped('shutdownWaitTimeout');
+        const timeout = this.settings.getTyped('shutdownWaitTimeout');
 
         await new Promise((resolve) => setTimeout(resolve, timeout))
             .then(() => process.exit(0))
