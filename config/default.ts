@@ -34,6 +34,13 @@ const config: Settings = {
             zippedArchive: true,
         },
     },
+    pharo: {
+        destination: path.resolve(__dirname, `../resources/pharo.json`),
+        interface: {
+            name: '[typescript]-[meta]-[model]',
+            path: path.resolve(__dirname, `../app/Services/generated/TypescriptMetaModel.ts`),
+        }
+    },
     shutdownWaitTimeout: +env('SHUTDOWN_WAIT_TIMEOUT', 10), // seconds
 };
 

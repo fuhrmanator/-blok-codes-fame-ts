@@ -13,7 +13,6 @@ module.exports = {
         '@typescript-eslint',
         'import',
         'mocha',
-        'oclif',
         'prettier',
         'simple-import-sort',
     ],

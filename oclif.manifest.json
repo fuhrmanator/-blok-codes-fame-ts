@@ -1,31 +1,33 @@
 {
     "version": "1.0.0",
     "commands": {
-        "something": {
-            "id": "something",
-            "description": "Say hello",
+        "update": {
+            "id": "update",
+            "description": "Update the typescript meta-model interface",
             "strict": true,
             "pluginName": "@blok-codes/fame-ts",
             "pluginAlias": "@blok-codes/fame-ts",
             "pluginType": "core",
             "aliases": [],
             "examples": [
-                "$ oex hello friend --from oclif\nhello friend from oclif! (./src/commands/hello/index.ts)\n"
+                "$ oex update meta-model --source path/to/file.json\nUpdated meta-model from src to resources/pharo.json\n"
             ],
             "flags": {
-                "from": {
-                    "name": "from",
+                "source": {
+                    "name": "source",
                     "type": "option",
-                    "char": "f",
-                    "description": "Whom is saying hello",
+                    "char": "s",
+                    "default": "",
+                    "description": "Path to the typescript meta-model from pharo json file",
                     "required": true,
                     "multiple": false
                 }
             },
             "args": [
                 {
-                    "name": "person",
-                    "description": "Person to say hello to",
+                    "name": "options",
+                    "description": "Which option to update",
+                    "options": ["interface", "meta-model"],
                     "required": true
                 }
             ]

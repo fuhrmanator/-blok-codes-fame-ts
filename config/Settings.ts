@@ -31,5 +31,12 @@ export interface Settings {
         level: Level,
         rotation: DailyRotateFileTransportOptions,
     },
+    pharo: {
+        destination: string,
+        interface: {
+            name: string,
+            path: string,
+        },
+    },
     shutdownWaitTimeout: number,
 }

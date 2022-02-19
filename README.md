@@ -29,8 +29,36 @@ USAGE
 
 # Commands
 <!-- commands -->
+* [`fame-ts update [OPTIONS]`](#fame-ts-update-options)
 * [`fame-ts autocomplete [SHELL]`](#fame-ts-autocomplete-shell)
 * [`fame-ts help [COMMAND]`](#fame-ts-help-command)
+
+## `fame-ts update [OPTIONS]`
+
+update the typescript meta-model interface
+
+```
+USAGE
+  $ fame-ts update [OPTIONS] -s <value>
+
+ARGUMENTS
+  OPTIONS  (interface|meta-model) which option to update (updating the meta-model will update the interface as well)
+
+FLAGS
+  -s, --source=<value>  (required) path to the typescript meta-model from pharo json file
+
+DESCRIPTION
+  Update the typescript meta-model interface
+
+EXAMPLES
+  $ fame-ts update meta-model -s path/to/(meta-model).json
+
+  $ fame-ts update meta-model --source path/to/(meta-model).json
+
+  $ fame-ts update interface
+```
+
+_See code: [update command](app/Console/update.ts)_
 
 ## `fame-ts autocomplete [SHELL]`
 
