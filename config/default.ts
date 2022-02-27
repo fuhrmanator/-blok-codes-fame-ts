@@ -36,6 +36,7 @@ const config: Settings = {
     },
     pharo: {
         destination: path.resolve(__dirname, `../resources/pharo.json`),
+        target: path.resolve(__dirname, `../resources/generated/`),
         interface: {
             name: '[typescript]-[meta]-[model]',
             path: path.resolve(__dirname, `../app/Services/generated/TypescriptMetaModel.ts`),
