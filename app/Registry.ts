@@ -1,12 +1,13 @@
 import { Container } from 'inversify';
 
 import { Provider } from './Providers/Provider';
+import { ServiceProvider } from './Providers/ServiceProvider';
 import { UtilityProvider } from './Providers/UtilityProvider';
 
 export class Registry {
     private static container: Container;
 
-    private static readonly providers: typeof Provider[] = [UtilityProvider];
+    private static readonly providers: typeof Provider[] = [UtilityProvider, ServiceProvider];
 
     private static readonly registerProviders = (): void => {
         Registry.container.load(...this.providers.map((provider) => provider.register()));

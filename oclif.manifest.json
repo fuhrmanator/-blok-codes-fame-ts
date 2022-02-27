@@ -31,6 +31,26 @@
                     "required": true
                 }
             ]
+        },
+        "generate": {
+            "id": "generate",
+            "description": "Generate the API",
+            "strict": true,
+            "pluginName": "@blok-codes/fame-ts",
+            "pluginAlias": "@blok-codes/fame-ts",
+            "pluginType": "core",
+            "aliases": [],
+            "examples": [
+                "$ oex generate api \nGenerated the API from the meta-model to resources/generated/\n"
+            ],
+            "args": [
+                {
+                    "name": "options",
+                    "description": "What to generate",
+                    "options": ["api"],
+                    "required": true
+                }
+            ]
         }
     }
 }

@@ -33,6 +33,7 @@ export interface Settings {
     },
     pharo: {
         destination: string,
+        target: string,
         interface: {
             name: string,
             path: string,
