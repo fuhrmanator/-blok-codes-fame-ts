@@ -27,8 +27,8 @@
     "scripts": {
         "start": "yarn build && yarn global",
         "build": "yarn clean:some && tsc -b",
-        "clean:some": "shx rm -rf dist docs",
-        "clean:all": "shx rm -rf dist docs node_modules yarn.lock",
+        "clean:some": "shx rm -rf dist docs resources/generated",
+        "clean:all": "shx rm -rf dist docs resources/generated node_modules yarn.lock",
         "commit": "git-cz",
         "cover": "yarn cover:unit && yarn cover:report",
         "cover:report": "nyc --reporter lcov --reporter clover --reporter text --report-dir tests/coverage/all report",

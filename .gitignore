@@ -23,4 +23,3 @@ node_modules/
 
 # generated files
 resources/generated/*
-resources/generated.ts
