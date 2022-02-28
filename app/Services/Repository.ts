@@ -32,14 +32,15 @@ export class Repository {
 
     private readonly addClass = (clazz: Class): void => {
         if (this.map.has(clazz.id)) {
-            return; // fixme: what to do when class already exists?
             throw new DuplicateEntryException(`class id: ${clazz.id}`, this.map.get(clazz.id));
         }
 
-        this.map.set(clazz.id, clazz);
+        if (clazz.FM3 === 'FM3.Trait') {
+            (clazz as any).isTrait = true; // eslint-disable-line @typescript-eslint/no-explicit-any
+        }
 
+        this.map.set(clazz.id, clazz);
         clazz.properties?.forEach((property) => this.addProperty(property));
-        clazz.traits?.forEach((trait) => this.addTrait(trait));
     };
 
     private readonly addProperty = (property: Property): void => {
@@ -48,15 +49,6 @@ export class Repository {
         }
 
         this.map.set(property.id, property);
-    };
-
-    private readonly addTrait = (trait: Trait): void => {
-        if (this.map.has(trait.ref)) {
-            return; // fixme: what to do when trait already exists?
-            throw new DuplicateEntryException(`trait ref: ${trait.ref}`, this.map.get(trait.ref));
-        }
-
-        this.map.set(trait.ref, trait);
     };
 
     public readonly get = (key: number | RefEnum): Stored => {

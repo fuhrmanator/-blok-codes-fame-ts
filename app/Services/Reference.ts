@@ -22,7 +22,6 @@ export class Reference {
         const entity = this.getEntity(ref);
 
         if (!('name' in entity)) {
-            return 'undefined'; // fixme: what to do when entity does not have a name?
             throw new NotFoundException(`Property 'name' not found in entity`);
         }
 
@@ -36,7 +35,6 @@ export class Reference {
         const entity = this.getEntity(ref);
 
         if (!('package' in entity)) {
-            return 'undefined'; // fixme: what to do when entity does not have a package?
             throw new NotFoundException(`Property 'package' not found in entity`);
         }
 
