@@ -14,11 +14,11 @@ export const addNamedImportDeclaration = (source: SourceFile, name: string, path
 };
 
 export const addFameDescriptionImportDeclaration = (source: SourceFile): void => {
-    addNamedImportDeclaration(source, 'FameDescription', '../../helpers');
+    addNamedImportDeclaration(source, 'FameDescription', '../Decorators');
 };
 
 export const addFamePropertyImportDeclaration = (source: SourceFile): void => {
-    addNamedImportDeclaration(source, 'FameProperty', '../../helpers');
+    addNamedImportDeclaration(source, 'FameProperty', '../Decorators');
 };
 
 export const addFamixMSEExporterImportDeclaration = (source: SourceFile): void => {
@@ -26,5 +26,5 @@ export const addFamixMSEExporterImportDeclaration = (source: SourceFile): void =
 };
 
 export const addSetWithOppositeImportDeclaration = (source: SourceFile): void => {
-    addNamedImportDeclaration(source, 'SetWithOpposite', '../../helpers');
+    addNamedImportDeclaration(source, 'SetWithOpposite', '../SetWithOpposite');
 };

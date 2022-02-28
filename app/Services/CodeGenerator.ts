@@ -234,7 +234,7 @@ export class CodeGenerator {
             this.logger.info(`      acceptTrait: adding trait import for ${name}`);
         });
 
-        // TODO: why do we need to validate a trait class has no superclass?
+        // TODO: why do we need to validate a trait class has no superclass? // sugar code ?
         assert(clazz.superclass === undefined, `Trait ${clazz.name} has a superclass defined.`);
 
         clazz.properties?.forEach((property) => {

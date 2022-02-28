@@ -26,7 +26,8 @@
     ],
     "scripts": {
         "start": "yarn build && yarn global",
-        "build": "yarn clean:some && tsc -b",
+        "build": "yarn clean:some && tsc -b && yarn build:famix",
+        "build:famix": "cp -r ./app/Services/famix ./resources/generated/",
         "clean:some": "shx rm -rf dist docs resources/generated",
         "clean:all": "shx rm -rf dist docs resources/generated node_modules yarn.lock",
         "commit": "git-cz",
