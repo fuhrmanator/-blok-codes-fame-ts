@@ -33,6 +33,8 @@ export class CodeGenerator {
         this.reference.addAll(metamodels);
 
         metamodels.forEach((metamodel) => this.acceptPackage(metamodel));
+
+        this.project.resolveSourceFileDependencies();
         this.project.saveSync();
     };
 
