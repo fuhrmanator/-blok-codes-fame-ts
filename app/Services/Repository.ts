@@ -39,6 +39,11 @@ export class Repository {
             (clazz as any).isTrait = true; // eslint-disable-line @typescript-eslint/no-explicit-any
         }
 
+        if (clazz.name === 'Object') {
+            // Class cannot be named 'Object'
+            (clazz as any).name = 'MockObject'; // eslint-disable-line @typescript-eslint/no-explicit-any
+        }
+
         this.map.set(clazz.id, clazz);
         clazz.properties?.forEach((property) => this.addProperty(property));
     };

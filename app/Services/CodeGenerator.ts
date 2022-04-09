@@ -64,7 +64,7 @@ export class CodeGenerator {
             classDeclaration.addImplements(this.addImportDeclaration(trait.ref, source));
         });
 
-        if (clazz.superclass !== undefined && (packageName !== 'Moose' || clazz.name !== 'Object')) {
+        if (clazz.superclass !== undefined && (packageName !== 'Moose' || clazz.name !== 'MockObject')) {
             this.acceptSuperclass(clazz, source, classDeclaration);
         }
 
@@ -134,6 +134,7 @@ export class CodeGenerator {
             return;
         }
 
+        // fixme: duplicated accessors happens here
         this.acceptAccessorProperty(property, source, classDeclaration, typeName);
     };
 
@@ -221,7 +222,7 @@ export class CodeGenerator {
             classDeclaration.addMethod({
                 name: `add${capitalize(property.name)}`,
                 parameters: [{ name: `the${capitalize(typeName)}`, type: `${typeName}` }],
-                statements: [`this._${property.name}.add(${`the${capitalize(typeName)}`})`],
+                statements: [`this._${property.name}.add(the${capitalize(typeName)})`],
             });
         }
     };

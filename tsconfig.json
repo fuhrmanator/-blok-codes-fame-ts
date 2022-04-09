@@ -32,7 +32,8 @@
     },
     "exclude": [
         "dist",
-        "node_modules"
+        "node_modules",
+        "resources",
     ],
     "include": [
         "app/**/*",

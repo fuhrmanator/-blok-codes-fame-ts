@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { NotFoundException } from '../../Exceptions/NotFoundException';
 
 type Context<U = any> = {
     [key: string]: U;
@@ -11,7 +10,7 @@ type ReferencedClass<U = any> = {
 
 export const createDynamicInstance = <T>(context: Context, name: string, ...args: any[]): T => {
     if (!context[name]) {
-        throw new NotFoundException(`Unknown class '${name}'`);
+        throw new Error(`Unknown class '${name}'`);
     }
 
     return instantiate(context[name], args);
@@ -31,3 +30,6 @@ const instantiate = <T>(clazz: ReferencedClass, args?: any[]): T => {
 
     return instance as T;
 };
+
+export const isInstanceOf = <T>(instance: T, properties: string[]): instance is T =>
+    properties.every((property) => property in instance);

@@ -1,5 +1,34 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Package, Property } from '../generated/TypescriptMetaModel';
+interface Package {
+    ref: number;
+}
+
+interface Property {
+    FM3: PropertyFM3;
+    id: number;
+    name: string;
+    class: Package;
+    container: boolean;
+    derived: boolean;
+    multivalued: boolean;
+    opposite?: Package;
+    type: Superclass;
+}
+
+enum PropertyFM3 {
+    FM3Property = 'FM3.Property',
+}
+
+interface Superclass {
+    ref: RefEnum | number;
+}
+
+enum RefEnum {
+    Boolean = 'Boolean',
+    Number = 'Number',
+    Object = 'Object',
+    String = 'String',
+}
 
 type FameDescriptionParam = {
     fameDescription: string;

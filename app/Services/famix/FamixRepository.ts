@@ -1,16 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { createDynamicInstance, isInstanceOf } from '../helpers';
+import { BaseElement } from './BaseElement';
 import { FamixBaseElement } from './FamixBaseElement';
-import { FamixMSEExporter } from './FamixMSEExporter';
-
-interface Class {
-    getMSE(): string;
-
-    addPropertiesToExporter(exporter: FamixMSEExporter): void;
-}
+import { createDynamicInstance, isInstanceOf } from './helpers';
 
 export class FamixRepository {
-    private classes: Set<Class> = new Set<Class>();
+    private classes: Set<BaseElement> = new Set<BaseElement>();
     private elements: Set<FamixBaseElement> = new Set<FamixBaseElement>();
 
     private counter = 1;
@@ -29,11 +23,11 @@ export class FamixRepository {
     };
 
     // TODO: what's the implication for Traits?
-    public readonly createOrGetFamixClass = (name: string, isInterface?: boolean): Class => {
+    public readonly createOrGetFamixClass = (name: string, isInterface?: boolean): BaseElement => {
         let instance = this.getFamixClass(name);
 
         if (!instance) {
-            instance = createDynamicInstance<Class>(this, 'Class');
+            instance = createDynamicInstance<BaseElement>(this, 'BaseElement');
 
             // TODO: why do we need this?
             (instance as any).name = name.toLowerCase();
@@ -44,7 +38,7 @@ export class FamixRepository {
         return instance;
     };
 
-    public readonly getFamixClass = (name: string): Class | undefined => {
+    public readonly getFamixClass = (name: string): BaseElement | undefined => {
         for (const clazz of this.classes) {
             if ((clazz as any).getName().toLowerCase() === name.toLowerCase()) {
                 return clazz;
@@ -55,7 +49,7 @@ export class FamixRepository {
     };
 
     public readonly addElement = (element: FamixBaseElement): void => {
-        if (isInstanceOf<Class>(element, ['getMSE', 'addPropertiesToExporter'])) {
+        if (isInstanceOf<BaseElement>(element, ['getMSE', 'addPropertiesToExporter'])) {
             this.classes.add(element);
         } else {
             this.elements.add(element);

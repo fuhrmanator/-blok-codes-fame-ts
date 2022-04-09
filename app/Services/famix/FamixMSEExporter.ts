@@ -1,10 +1,15 @@
-import { FamixBaseElement } from './FamixBaseElement';
+import { BaseElement } from './BaseElement';
+import { isInstanceOf } from './helpers';
+
+interface Element extends BaseElement {
+    id?: number;
+}
 
 export class FamixMSEExporter {
-    private element: FamixBaseElement;
+    private element: Element;
     private buffer: string;
 
-    constructor(clazz: string, element: FamixBaseElement) {
+    constructor(clazz: string, element: Element) {
         this.element = element;
         this.buffer = `(${clazz}  (id: ${this.element.id})`;
     }
@@ -16,7 +21,7 @@ export class FamixMSEExporter {
 
         if (value instanceof Set) {
             this.buffer += `\n    (${name} ${this.addPropertyFromSet(value)})`;
-        } else if (value instanceof FamixBaseElement) {
+        } else if (this.isElement(value)) {
             this.buffer += `\n    (${name} (ref: ${value.id}))`;
         } else if (typeof value === 'string') {
             this.buffer += `\n    (${name} '${value}')`;
@@ -31,7 +36,7 @@ export class FamixMSEExporter {
         set.forEach((value) => {
             if (typeof value === 'string') {
                 buffer += `'${value}'`;
-            } else if (value instanceof FamixBaseElement) {
+            } else if (this.isElement(value)) {
                 buffer += `(ref: ${value.id})`;
             } else {
                 buffer += `${value}`;
@@ -42,4 +47,8 @@ export class FamixMSEExporter {
     };
 
     public readonly getMSE = (): string => this.buffer + ')\n';
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    private readonly isElement = (value: any): value is Element =>
+        isInstanceOf<Element>(value, ['getMSE', 'addPropertiesToExporter']);
 }
