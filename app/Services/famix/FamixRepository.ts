@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { BaseElement } from './BaseElement';
+import { BaseElement as FamixElement } from './BaseElement';
 import { FamixBaseElement } from './FamixBaseElement';
 import { createDynamicInstance, isInstanceOf } from './helpers';
 
 export class FamixRepository {
-    private classes: Set<BaseElement> = new Set<BaseElement>();
+    private classes: Set<FamixElement> = new Set<FamixElement>();
     private elements: Set<FamixBaseElement> = new Set<FamixBaseElement>();
 
     private counter = 1;
@@ -23,11 +23,11 @@ export class FamixRepository {
     };
 
     // TODO: what's the implication for Traits?
-    public readonly createOrGetFamixClass = (name: string, isInterface?: boolean): BaseElement => {
+    public readonly createOrGetFamixClass = (name: string, isInterface?: boolean): FamixElement => {
         let instance = this.getFamixClass(name);
 
         if (!instance) {
-            instance = createDynamicInstance<BaseElement>(this, 'BaseElement');
+            instance = createDynamicInstance<FamixElement>(this, 'BaseElement');
 
             // TODO: why do we need this?
             (instance as any).name = name.toLowerCase();
@@ -38,7 +38,7 @@ export class FamixRepository {
         return instance;
     };
 
-    public readonly getFamixClass = (name: string): BaseElement | undefined => {
+    public readonly getFamixClass = (name: string): FamixElement | undefined => {
         for (const clazz of this.classes) {
             if ((clazz as any).getName().toLowerCase() === name.toLowerCase()) {
                 return clazz;
@@ -49,7 +49,7 @@ export class FamixRepository {
     };
 
     public readonly addElement = (element: FamixBaseElement): void => {
-        if (isInstanceOf<BaseElement>(element, ['getMSE', 'addPropertiesToExporter'])) {
+        if (isInstanceOf<FamixElement>(element, ['getMSE', 'addPropertiesToExporter'])) {
             this.classes.add(element);
         } else {
             this.elements.add(element);
