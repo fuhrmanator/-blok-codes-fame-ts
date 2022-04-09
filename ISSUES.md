@@ -7,6 +7,7 @@
 - [ ] resources/generated/Tagging/Association.ts - Unknown import { Tag } from "../Tagging/Tag".
 - [x] resources/generated/Moose/Model.ts - Duplicate identifier 'numberOfClassesPerPackage'.
 - [ ] resources/generated/FamixTypeScript/ContainerEntity.ts - Class 'ContainerEntity' incorrectly implements interface 'TEntityMetaLevelDependency'.
+- [ ] resources/generated/Moose/Model.ts - Class 'Model' incorrectly extends base class 'AbstractGroup'. Types have separate declarations of a private property '_numberOfLinesOfCode'.
 
 ## Known traits issues
 - [x] properties are not generated for traits
