@@ -45,7 +45,7 @@ ARGUMENTS
   OPTIONS  (interface|meta-model) which option to update (updating the meta-model will update the interface as well)
 
 FLAGS
-  -s, --source=<value>  (required) path to the typescript meta-model from pharo json file
+  -s, --source=<value>  (required) path to the typescript meta-model from metamodel json file
 
 DESCRIPTION
   Update the typescript meta-model interface

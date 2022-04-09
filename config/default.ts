@@ -34,14 +34,15 @@ const config: Settings = {
             zippedArchive: true,
         },
     },
-    pharo: {
-        destination: path.resolve(__dirname, `../resources/pharo.json`),
+    metamodel: {
+        destination: path.resolve(__dirname, `../resources/metamodel.json`),
         target: path.resolve(__dirname, `../resources/generated/`),
         interface: {
             name: '[typescript]-[meta]-[model]',
             path: path.resolve(__dirname, `../app/Services/generated/TypescriptMetaModel.ts`),
         }
     },
+    tsConfigFilePath: path.resolve(__dirname, `../tsconfig.json`),
     shutdownWaitTimeout: +env('SHUTDOWN_WAIT_TIMEOUT', 10), // seconds
 };
 

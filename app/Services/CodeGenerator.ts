@@ -1,6 +1,6 @@
 import assert from 'assert';
 import { inject, injectable } from 'inversify';
-import { capitalize } from 'lodash';
+import { capitalize, uniq, uniqWith } from 'lodash';
 import { ClassDeclaration, InterfaceDeclaration, Project, Scope, SourceFile } from 'ts-morph';
 import { Logger } from 'winston';
 
@@ -51,7 +51,7 @@ export class CodeGenerator {
                 this.acceptClass(clazz, source);
             }
 
-            source.insertStatements(0, ['// This code automagically generated from a metamodel using ts-morph']);
+            source.insertStatements(0, ['// This code is automagically generated from a metamodel using ts-morph']);
             source.formatText();
         });
     };
@@ -73,7 +73,7 @@ export class CodeGenerator {
         const addPropertiesToExporterStatements: string[] = [];
         addFamixMSEExporterImportDeclaration(source);
 
-        clazz.properties
+        uniqWith(clazz.properties, (a, b) => a.name === b.name)
             ?.sort((a, b) => a.name.localeCompare(b.name))
             .forEach((property) => {
                 this.acceptProperty(property, source, classDeclaration);
@@ -86,7 +86,7 @@ export class CodeGenerator {
         classDeclaration.addMethod({
             name: 'addPropertiesToExporter',
             parameters: [{ name: 'exporter', type: 'FamixMSEExporter' }],
-            statements: addPropertiesToExporterStatements,
+            statements: uniq(addPropertiesToExporterStatements),
         });
 
         classDeclaration.addMethod({
@@ -136,7 +136,6 @@ export class CodeGenerator {
             return;
         }
 
-        // fixme: duplicated accessors happens here
         this.acceptAccessorProperty(property, source, classDeclaration, typeName);
     };
 
@@ -189,7 +188,7 @@ export class CodeGenerator {
         });
 
         let oppositeName = '';
-        let base = property.multivalued ? 'Many' : 'One'; // TODO: explicit name - className relationship?;
+        let base = property.multivalued ? 'Many' : 'One';
 
         if (property.opposite) {
             const entity: Property = this.reference.getEntity(property.opposite.ref) as Property;
@@ -230,19 +229,16 @@ export class CodeGenerator {
     };
 
     private readonly acceptTrait = (clazz: Class, source: SourceFile): void => {
+        this.logger.info(`Interface: ${clazz.name}`);
+
         const interfaceDeclaration = source.addInterface({ isExported: true, name: clazz.name });
-
-        clazz.traits?.forEach((trait) => {
-            const name = this.addImportDeclaration(trait.ref, source);
-            this.logger.info(`      acceptTrait: adding trait import for ${name}`);
-        });
-
-        // TODO: why do we need to validate a trait class has no superclass? // sugar code ?
         assert(clazz.superclass === undefined, `Trait ${clazz.name} has a superclass defined.`);
 
-        clazz.properties?.forEach((property) => {
-            this.acceptPropertyTrait(property, source, interfaceDeclaration);
-        });
+        uniqWith(clazz.properties, (a, b) => a.name === b.name)
+            ?.sort((a, b) => a.name.localeCompare(b.name))
+            .forEach((property) => {
+                this.acceptPropertyTrait(property, source, interfaceDeclaration);
+            });
     };
 
     private readonly acceptPropertyTrait = (
@@ -250,20 +246,9 @@ export class CodeGenerator {
         source: SourceFile,
         interfaceDeclaration: InterfaceDeclaration
     ): void => {
-        if (property.derived && !property.opposite) {
-            this.acceptDerivedPropertyTrait(property, source, interfaceDeclaration);
-            return;
+        if (interfaceDeclaration.getProperty(property.name)) {
+            return; // Property already exists
         }
-
-        this.acceptAccessorPropertyTrait(property, source);
-    };
-
-    private readonly acceptDerivedPropertyTrait = (
-        property: Property,
-        source: SourceFile,
-        interfaceDeclaration: InterfaceDeclaration
-    ): void => {
-        addFamePropertyImportDeclaration(source);
 
         const typeName = isRefEnum(property.type.ref)
             ? toTsType(property.type.ref as string)
@@ -273,23 +258,48 @@ export class CodeGenerator {
             this.addImportDeclaration(property.type.ref, source);
         }
 
+        if (property.derived && !property.opposite) {
+            this.acceptDerivedPropertyTrait(property, source, interfaceDeclaration, typeName);
+            return;
+        }
+
+        this.acceptAccessorPropertyTrait(property, source, interfaceDeclaration, typeName);
+    };
+
+    private readonly acceptDerivedPropertyTrait = (
+        property: Property,
+        source: SourceFile,
+        interfaceDeclaration: InterfaceDeclaration,
+        typeName: string
+    ): void => {
+        this.logger.info(`  Property: ${property.name}, id: ${property.id}, type.ref: ${property.type.ref}`);
+
+        if (this.reference.getEntityName(property.class.ref) !== interfaceDeclaration.getName()) {
+            this.addImportDeclaration(property.class.ref, source);
+        }
+
         interfaceDeclaration.addProperty({
             name: property.name,
             type: property.multivalued ? `${typeName}[]` : typeName,
         });
     };
 
-    private readonly acceptAccessorPropertyTrait = (property: Property, source: SourceFile): void => {
-        // TODO: should this method more like acceptAccessorProperty but for traits?
-        addFamePropertyImportDeclaration(source);
+    private readonly acceptAccessorPropertyTrait = (
+        property: Property,
+        source: SourceFile,
+        interfaceDeclaration: InterfaceDeclaration,
+        typeName: string
+    ): void => {
+        this.logger.info(`  Property: ${property.name}, id: ${property.id}, type.ref: ${property.type.ref}`);
 
-        if (property.type) {
+        if (property.type && this.reference.getEntityName(property.class.ref) !== interfaceDeclaration.getName()) {
             this.addImportDeclaration(property.class.ref, source);
         }
 
-        if (property.multivalued) {
-            addSetWithOppositeImportDeclaration(source);
-        }
+        interfaceDeclaration.addProperty({
+            name: property.name,
+            type: property.multivalued ? `${typeName}[]` : typeName,
+        });
     };
 
     private readonly addImportDeclaration = (ref: number | RefEnum, source: SourceFile): string => {

@@ -31,7 +31,7 @@ export interface Settings {
         level: Level,
         rotation: DailyRotateFileTransportOptions,
     },
-    pharo: {
+    metamodel: {
         destination: string,
         target: string,
         interface: {
@@ -39,5 +39,6 @@ export interface Settings {
             path: string,
         },
     },
+    tsConfigFilePath: string,
     shutdownWaitTimeout: number,
 }

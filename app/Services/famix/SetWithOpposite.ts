@@ -33,6 +33,8 @@ export abstract class SetWithOpposite<T> extends Set {
     };
 
     public readonly clear = (): void => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         for (const value of this) {
             this.delete(value);
         }

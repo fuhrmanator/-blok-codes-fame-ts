@@ -29,7 +29,7 @@ export class Reference {
     };
 
     public readonly getEntityClassPath = (ref: number | RefEnum): string =>
-        path.resolve(this.settings.getTyped('pharo').target, this.getEntityClassBaseName(ref));
+        path.resolve(this.settings.getTyped('metamodel').target, this.getEntityClassBaseName(ref));
 
     public readonly getEntityClassBaseName = (ref: number | RefEnum): string => {
         const entity = this.getEntity(ref);

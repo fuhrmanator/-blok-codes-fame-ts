@@ -2,115 +2,115 @@
 
 
 ## Known classes issues
-- [ ] resources/generated/Famix-Traits/TypeGroup.ts - Duplicate identifier 'averageNumberOfMethods'.
+- [x] resources/generated/Famix-Traits/TypeGroup.ts - Duplicate identifier 'averageNumberOfMethods'.
 - [ ] resources/generated/Tagging/Association.ts - 'Tag' is declared but its value is never read.
 - [ ] resources/generated/Tagging/Association.ts - Unknown import { Tag } from "../Tagging/Tag".
-- [ ] resources/generated/Moose/Model.ts - Duplicate identifier 'numberOfClassesPerPackage'.
+- [x] resources/generated/Moose/Model.ts - Duplicate identifier 'numberOfClassesPerPackage'.
 - [ ] resources/generated/FamixTypeScript/ContainerEntity.ts - Class 'ContainerEntity' incorrectly implements interface 'TEntityMetaLevelDependency'.
 
 ## Known traits issues
-- [ ] accessors are not generated for traits
-- [ ] resources/generated/Famix-Traits/TAccess.ts - 'TWithComments' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TAccessible.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TAnnotationInstance.ts - 'TEntityMetaLevelDependency' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TAnnotationInstanceAttribute.ts - 'TEntityMetaLevelDependency' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TAnnotationType.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TAnnotationTypeAttribute.ts - 'TCanBeClassSide' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TAssociation.ts - 'TSourceEntity' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TAttribute.ts - 'TAccessible' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TCanBeAbstract.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TCanBeClassSide.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TCanBeFinal.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TCaughtException.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TClass.ts - 'TPackageable' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TCohesionCouplingMetrics.ts - 'TWithComments' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TComment.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TCompilationUnit.ts - 'TFile' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TDeclaredException.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TDefinedInModule.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TDereferencedInvocation.ts - 'TWithComments' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TEnumValue.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TException.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TFile.ts - 'TFileSystemEntity' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TFileAnchor.ts - 'TSourceAnchor' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TFileInclude.ts - 'TWithComments' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TFileNavigation.ts - 'TFileAnchor' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TFileSystemEntity.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TFolder.ts - 'TFileSystemEntity' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TFunction.ts - 'TWithStatements' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TGlobalVariable.ts - 'TAccessible' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/THasImmediateSource.ts - 'TSourceAnchor' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/THasModifiers.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/THasSignature.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/THasVisibility.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/THeader.ts - 'TFile' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TImplicitVariable.ts - 'TAccessible' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TIndexedFileNavigation.ts - 'TFileAnchor' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TInheritance.ts - 'TWithComments' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TInvocable.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TInvocation.ts - 'TWithComments' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TInvocationsReceiver.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TLCOMMetrics.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TLocalVariable.ts - 'TAccessible' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TMethod.ts - 'TWithStatements' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TModule.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TMultipleFileAnchor.ts - 'TSourceAnchor' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TNamedEntity.ts - 'TSourceEntity' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TPackage.ts - 'TWithComments' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TPackageable.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TParameter.ts - 'TAccessible' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TParameterizedType.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TParameterizedTypeUser.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TReference.ts - 'TWithComments' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TReferenceable.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TRelativeSourceAnchor.ts - 'TSourceAnchor' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TSourceAnchor.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TSourceEntity.ts - 'TWithComments' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TSourceLanguage.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TTemplate.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TTemplateUser.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TThrownException.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TTrait.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TTraitUsage.ts - 'TWithComments' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TTraitUser.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TType.ts - 'TWithComments' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TTypeAlias.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TTypedAnnotationInstance.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TTypedAnnotationInstanceAttribute.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TTypedEntity.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithAccesses.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithAnnotationInstanceAttributes.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithAnnotationInstances.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithAnnotationTypes.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithAttributes.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithCaughtExceptions.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithClasses.ts - 'TWithTypes' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithComments.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithCompilationUnits.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithDeclaredExceptions.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithDereferencedInvocations.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithEnumValues.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithExceptions.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithFileIncludes.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithFiles.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithFunctions.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithGlobalVariables.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithHeader.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithImplicitVariables.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithInheritances.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithInvocations.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithLocalVariables.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithMethods.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithPackages.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithParameterizedTypes.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithParameterizedTypeUsers.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithParameters.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithReferences.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithSourceLanguages.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithStatements.ts - 'TWithComments' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithTemplates.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithThrownExceptions.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithTraits.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithTypeAliases.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Famix-Traits/TWithTypes.ts - 'FameProperty' is declared but its value is never read.
-- [ ] resources/generated/Moose-Query/TEntityMetaLevelDependency.ts - 'FameProperty' is declared but its value is never read.
+- [x] properties are not generated for traits
+- [x] resources/generated/Famix-Traits/TAccess.ts - 'TWithComments' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TAccessible.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TAnnotationInstance.ts - 'TEntityMetaLevelDependency' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TAnnotationInstanceAttribute.ts - 'TEntityMetaLevelDependency' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TAnnotationType.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TAnnotationTypeAttribute.ts - 'TCanBeClassSide' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TAssociation.ts - 'TSourceEntity' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TAttribute.ts - 'TAccessible' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TCanBeAbstract.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TCanBeClassSide.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TCanBeFinal.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TCaughtException.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TClass.ts - 'TPackageable' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TCohesionCouplingMetrics.ts - 'TWithComments' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TComment.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TCompilationUnit.ts - 'TFile' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TDeclaredException.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TDefinedInModule.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TDereferencedInvocation.ts - 'TWithComments' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TEnumValue.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TException.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TFile.ts - 'TFileSystemEntity' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TFileAnchor.ts - 'TSourceAnchor' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TFileInclude.ts - 'TWithComments' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TFileNavigation.ts - 'TFileAnchor' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TFileSystemEntity.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TFolder.ts - 'TFileSystemEntity' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TFunction.ts - 'TWithStatements' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TGlobalVariable.ts - 'TAccessible' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/THasImmediateSource.ts - 'TSourceAnchor' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/THasModifiers.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/THasSignature.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/THasVisibility.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/THeader.ts - 'TFile' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TImplicitVariable.ts - 'TAccessible' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TIndexedFileNavigation.ts - 'TFileAnchor' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TInheritance.ts - 'TWithComments' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TInvocable.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TInvocation.ts - 'TWithComments' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TInvocationsReceiver.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TLCOMMetrics.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TLocalVariable.ts - 'TAccessible' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TMethod.ts - 'TWithStatements' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TModule.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TMultipleFileAnchor.ts - 'TSourceAnchor' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TNamedEntity.ts - 'TSourceEntity' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TPackage.ts - 'TWithComments' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TPackageable.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TParameter.ts - 'TAccessible' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TParameterizedType.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TParameterizedTypeUser.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TReference.ts - 'TWithComments' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TReferenceable.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TRelativeSourceAnchor.ts - 'TSourceAnchor' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TSourceAnchor.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TSourceEntity.ts - 'TWithComments' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TSourceLanguage.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TTemplate.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TTemplateUser.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TThrownException.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TTrait.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TTraitUsage.ts - 'TWithComments' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TTraitUser.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TType.ts - 'TWithComments' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TTypeAlias.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TTypedAnnotationInstance.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TTypedAnnotationInstanceAttribute.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TTypedEntity.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithAccesses.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithAnnotationInstanceAttributes.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithAnnotationInstances.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithAnnotationTypes.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithAttributes.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithCaughtExceptions.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithClasses.ts - 'TWithTypes' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithComments.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithCompilationUnits.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithDeclaredExceptions.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithDereferencedInvocations.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithEnumValues.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithExceptions.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithFileIncludes.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithFiles.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithFunctions.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithGlobalVariables.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithHeader.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithImplicitVariables.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithInheritances.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithInvocations.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithLocalVariables.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithMethods.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithPackages.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithParameterizedTypes.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithParameterizedTypeUsers.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithParameters.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithReferences.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithSourceLanguages.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithStatements.ts - 'TWithComments' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithTemplates.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithThrownExceptions.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithTraits.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithTypeAliases.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Famix-Traits/TWithTypes.ts - 'FameProperty' is declared but its value is never read.
+- [x] resources/generated/Moose-Query/TEntityMetaLevelDependency.ts - 'FameProperty' is declared but its value is never read.

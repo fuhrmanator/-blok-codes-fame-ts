@@ -21,7 +21,7 @@ export default class Update extends Command {
         source: Flags.string({
             char: 's',
             default: '',
-            description: 'Path to the typescript meta-model from pharo json file',
+            description: 'Path to the typescript meta-model from metamodel json file',
             required: true,
         }),
     };
@@ -46,15 +46,15 @@ export default class Update extends Command {
     };
 
     private readonly copy = async (source: string): Promise<void> => {
-        await fs.copy(source, this.settings.getTyped('pharo').destination, { overwrite: true });
-        this.logger.info(`Updated meta-model from ${source} to ${this.settings.getTyped('pharo').destination}`);
+        await fs.copy(source, this.settings.getTyped('metamodel').destination, { overwrite: true });
+        this.logger.info(`Updated meta-model from ${source} to ${this.settings.getTyped('metamodel').destination}`);
     };
 
     private readonly updateInterface = async () => {
-        const options = this.settings.getTyped('pharo').interface;
+        const options = this.settings.getTyped('metamodel').interface;
         const encoding = { encoding: 'utf8' };
 
-        const sample = await fs.readJson(this.settings.getTyped('pharo').destination, encoding);
+        const sample = await fs.readJson(this.settings.getTyped('metamodel').destination, encoding);
         const { lines } = await parser.json({ name: options.name, samples: [JSON.stringify(sample)] });
 
         await fs.outputFile(options.path, lines.join('\n'), encoding);

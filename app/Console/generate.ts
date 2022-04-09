@@ -33,7 +33,7 @@ export default class Generate extends Command {
 
         if (args.options === 'api') {
             this.generator.generate();
-            this.logger.info(`Generated the API from the meta-model to ${this.settings.getTyped('pharo').target}`);
+            this.logger.info(`Generated the API from the meta-model to ${this.settings.getTyped('metamodel').target}`);
         }
     };
 }

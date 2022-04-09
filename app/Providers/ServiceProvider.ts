@@ -20,11 +20,17 @@ export class ServiceProvider extends Provider {
             this.registerCodeGenerator(bind);
         });
 
-    private static readonly registerProject = (bind: interfaces.Bind) =>
-        bind<Project>('Project').to(Project).inSingletonScope();
+    private static readonly registerProject = (bind: interfaces.Bind) => {
+        const project = new Project({
+            skipAddingFilesFromTsConfig: true,
+            tsConfigFilePath: settings.getTyped('tsConfigFilePath'),
+        });
+
+        bind<Project>('Project').toConstantValue(project);
+    };
 
     private static readonly registerRepository = (bind: interfaces.Bind) => {
-        const sample = fs.readFileSync(settings.getTyped('pharo').destination, { encoding: 'utf8' });
+        const sample = fs.readFileSync(settings.getTyped('metamodel').destination, { encoding: 'utf8' });
         const repository = new Repository(Convert.toTypescriptMetaModel(sample));
 
         bind<Repository>('Repository').toConstantValue(repository);

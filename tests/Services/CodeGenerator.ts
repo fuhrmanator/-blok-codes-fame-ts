@@ -20,7 +20,7 @@ describe('accessors', () => {
     const traitAccessors: { clazz: string; name: string; }[] = [];
 
     beforeAll(() => {
-        project.addSourceFilesAtPaths(settings.getTyped('pharo').target + '**/**/*{.d.ts,.ts}');
+        project.addSourceFilesAtPaths(settings.getTyped('metamodel').target + '**/**/*{.d.ts,.ts}');
         project.resolveSourceFileDependencies();
 
         files = project.getSourceFiles();
@@ -45,7 +45,7 @@ describe('accessors', () => {
 
     it('should have all traits accessors', () => {
         traitAccessors.forEach(({ clazz, name }) => {
-            const source = files.find((file) => file.getClass(clazz) && file.getClass(clazz).getGetAccessor(name));
+            const source = files.find((file) => file.getInterface(clazz) && file.getInterface(clazz).getProperty(name));
             expect(source).toBeDefined();
         });
     });
