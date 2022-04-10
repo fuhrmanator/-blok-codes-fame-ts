@@ -39,10 +39,10 @@ export class ProcessHandler {
         const timeout = this.settings.getTyped('shutdownWaitTimeout');
 
         await new Promise((resolve) => setTimeout(resolve, timeout))
-            .then(() => process.exit(0))
+            .then(() => process.exit(1))
             .catch((error) => {
                 this.logger.error('🤦🏽💥 Error while shutting down application :', error);
-                process.exit(1);
+                process.exit(0);
             });
     };
 }

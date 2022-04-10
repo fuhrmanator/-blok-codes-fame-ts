@@ -11,25 +11,23 @@ export class FamixRepository {
     private static instance: FamixRepository;
 
     public static readonly getInstance = (): FamixRepository => {
-        if (!FamixRepository.instance) {
-            FamixRepository.instance = new FamixRepository();
+        if (!this.instance) {
+            this.instance = new FamixRepository();
         }
 
-        return FamixRepository.instance;
+        return this.instance;
     };
 
     public static readonly clear = (): void => {
         this.instance = new FamixRepository();
     };
 
-    // TODO: what's the implication for Traits?
     public readonly createOrGetFamixClass = (name: string, isInterface?: boolean): FamixElement => {
         let instance = this.getFamixClass(name);
 
         if (!instance) {
             instance = createDynamicInstance<FamixElement>(this, 'BaseElement');
 
-            // TODO: why do we need this?
             (instance as any).name = name.toLowerCase();
             (instance as any).isStub = true;
             (instance as any).isInterface = isInterface;
