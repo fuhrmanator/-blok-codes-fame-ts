@@ -7,7 +7,7 @@ const logger = {
 } as any;
 
 const settings = {
-    getTyped: jest.fn((key: string) => 0),
+    getTyped: jest.fn((key: string) => 1),
 } as any;
 
 const error = { message: 'test' } as any;
@@ -18,7 +18,7 @@ let exitHandler: jest.SpyInstance;
 
 describe('ProcessHandler', () => {
     beforeAll(() => {
-        exitHandler = jest.spyOn(process, 'exit').mockImplementation(((code?: number) =>  void 0) as any);
+        exitHandler = jest.spyOn(process, 'exit').mockImplementation(null);
 
         onHandler = jest.spyOn(process, 'on').mockImplementation((event: any, callback: (...args: any[]) => any) => {
             callback(error);
@@ -45,10 +45,12 @@ describe('ProcessHandler', () => {
         expect(logger.error).toHaveBeenCalledWith(error.message, error);
     });
 
-    it('should handle shutdown', () => {
+    it('should handle shutdown', async () => {
         handler.handleShutdown();
         expect(onHandler).toHaveBeenCalledWith('SIGINT', expect.any(Function));
         expect(onHandler).toHaveBeenCalledWith('SIGTERM', expect.any(Function));
+
+        await new Promise((resolve) => setTimeout(resolve, 3))
 
         expect(exitHandler).toHaveBeenCalledWith(1);
         expect(logger.info).toHaveBeenCalledWith('🛑 Shutting down application...');
