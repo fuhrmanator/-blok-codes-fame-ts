@@ -39,9 +39,9 @@ export class Repository {
             (clazz as any).isTrait = true; // eslint-disable-line @typescript-eslint/no-explicit-any
         }
 
+        // Class name cannot be 'Object' when targeting ES5 with module CommonJS.
         if (clazz.name === 'Object') {
-            // Class cannot be named 'Object'
-            (clazz as any).name = 'MockObject'; // eslint-disable-line @typescript-eslint/no-explicit-any
+            (clazz as any).name = 'BaseObject'; // eslint-disable-line @typescript-eslint/no-explicit-any
         }
 
         this.map.set(clazz.id, clazz);

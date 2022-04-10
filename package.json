@@ -44,7 +44,7 @@
         "prepack": "yarn build && oclif manifest && oclif readme",
         "refresh": "yarn clean:all && yarn install && yarn build",
         "semantic-release": "semantic-release --branches main",
-        "test": "jest --colors --verbose"
+        "tests": "jest --colors --verbose"
     },
     "config": {
         "commitizen": {

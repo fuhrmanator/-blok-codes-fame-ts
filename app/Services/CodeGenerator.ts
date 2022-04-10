@@ -66,8 +66,12 @@ export class CodeGenerator {
             classDeclaration.addImplements(this.addImportDeclaration(trait.ref, source));
         });
 
-        if (clazz.superclass !== undefined && (packageName !== 'Moose' || clazz.name !== 'MockObject')) {
+        if (clazz.superclass !== undefined && (packageName !== 'Moose' || clazz.name !== 'BaseObject')) {
             this.acceptSuperclass(clazz, source, classDeclaration);
+        }
+
+        if (clazz.name === 'BaseObject') {
+            classDeclaration.setExtends('Object'); // Extends TypeScript's built-in Object class
         }
 
         const addPropertiesToExporterStatements: string[] = [];
