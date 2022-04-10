@@ -1,6 +1,6 @@
 import assert from 'assert';
 import { inject, injectable } from 'inversify';
-import { capitalize, uniq, uniqWith } from 'lodash';
+import { camelCase, uniq, uniqWith } from 'lodash';
 import { ClassDeclaration, InterfaceDeclaration, Project, Scope, SourceFile } from 'ts-morph';
 import { Logger } from 'winston';
 
@@ -160,8 +160,10 @@ export class CodeGenerator {
             addSetWithOppositeImportDeclaration(source);
         }
 
-        const getter = { name: `${property.name}`, returnType: `${property.multivalued ? typeName : ''}` };
-        const accessorDeclaration = classDeclaration.addGetAccessor(getter);
+        const accessorDeclaration = classDeclaration.addGetAccessor({
+            name: `${property.name}`,
+            returnType: property.multivalued ? `Set<${typeName}>` : typeName,
+        });
 
         accessorDeclaration.addDecorator({
             arguments: [`{ name: "${property.name}", derived: ${property.derived}, container: ${property.container}}`],
@@ -215,6 +217,7 @@ export class CodeGenerator {
 
         const { getAccessor, setAccessor } = getAccessorsDefinitionTemplate({
             base,
+            multivalued: property.multivalued,
             oppositeName,
             propName: property.name,
             typeName,
@@ -225,9 +228,10 @@ export class CodeGenerator {
 
         if (property.multivalued) {
             classDeclaration.addMethod({
-                name: `add${capitalize(property.name)}`,
-                parameters: [{ name: `the${capitalize(typeName)}`, type: `${typeName}` }],
-                statements: [`this._${property.name}.add(the${capitalize(typeName)})`],
+                name: camelCase(`add ${property.name}`),
+                parameters: [{ name: camelCase(`the ${typeName}`), type: `${typeName}` }],
+                returnType: 'void',
+                statements: [`this._${property.name}.add(${camelCase(`the ${typeName}`)})`],
             });
         }
     };
