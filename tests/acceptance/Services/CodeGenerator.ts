@@ -1,9 +1,9 @@
 import { Project, SourceFile } from 'ts-morph';
 
-import { kernel } from '../../app/Kernel';
-import { Reference } from '../../app/Services/Reference';
-import { Settings } from '../../app/Utils/Settings';
-import { TypescriptMetaModel } from '../../app/Services/generated/TypescriptMetaModel';
+import { kernel } from '../../../app/Kernel';
+import { Reference } from '../../../app/Services/Reference';
+import { Settings } from '../../../app/Utils/Settings';
+import { TypescriptMetaModel } from '../../../app/Services/generated/TypescriptMetaModel';
 
 describe('accessors', () => {
     const FM3_TRAIT = 'FM3.Trait';

@@ -10,15 +10,15 @@ export class Registry {
     private static readonly providers: typeof Provider[] = [UtilityProvider, ServiceProvider];
 
     private static readonly registerProviders = (): void => {
-        Registry.container.load(...this.providers.map((provider) => provider.register()));
+        this.container.load(...this.providers.map((provider) => provider.register()));
     };
 
     public static readonly getContainer = (): Container => {
-        if (!Registry.container) {
-            Registry.container = new Container();
-            Registry.registerProviders();
+        if (!this.container) {
+            this.container = new Container();
+            this.registerProviders();
         }
 
-        return Registry.container;
+        return this.container;
     };
 }
