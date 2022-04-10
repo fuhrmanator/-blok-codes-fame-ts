@@ -308,9 +308,10 @@ export class CodeGenerator {
 
     private readonly addImportDeclaration = (ref: number | RefEnum, source: SourceFile): string => {
         const name = this.reference.getEntityName(ref);
-        const path = this.reference.getEntityClassBaseName(ref);
+        const baseName = this.reference.getEntityClassBaseName(ref);
 
-        addNamedImportDeclaration(source, name, `../${path}`);
+        const path = source.getFilePath().includes(baseName.replace(`/${name}`, '')) ? `./${name}` : `../${baseName}`;
+        addNamedImportDeclaration(source, name, path);
 
         return name;
     };
