@@ -15,13 +15,13 @@ export default class Update extends Command {
     @inject('Logger')
     private readonly logger!: Logger;
 
-    static description = 'Update the typescript meta-model interface';
+    static description = 'Update the typescript metamodel interface';
 
     public static readonly flags: Interfaces.FlagInput<Record<string, unknown>> = {
         source: Flags.string({
             char: 's',
             default: '',
-            description: 'Path to the typescript meta-model from metamodel json file',
+            description: 'Path to the typescript metamodel from metamodel json file',
             required: true,
         }),
     };
@@ -30,7 +30,7 @@ export default class Update extends Command {
         {
             description: 'Which option to update',
             name: 'options',
-            options: ['interface', 'meta-model'],
+            options: ['interface', 'metamodel'],
             required: true,
         },
     ];
@@ -38,7 +38,7 @@ export default class Update extends Command {
     public readonly run = async (): Promise<void> => {
         const { args, flags } = await this.parse(Update);
 
-        if (args.options === 'meta-model') {
+        if (args.options === 'metamodel') {
             await this.copy(flags.source as string);
         }
 
@@ -47,7 +47,7 @@ export default class Update extends Command {
 
     private readonly copy = async (source: string): Promise<void> => {
         await fs.copy(source, this.settings.getTyped('metamodel').destination, { overwrite: true });
-        this.logger.info(`Updated meta-model from ${source} to ${this.settings.getTyped('metamodel').destination}`);
+        this.logger.info(`Updated metamodel from ${source} to ${this.settings.getTyped('metamodel').destination}`);
     };
 
     private readonly updateInterface = async () => {

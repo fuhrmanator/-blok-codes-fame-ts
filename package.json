@@ -33,7 +33,7 @@
         "commit": "git-cz",
         "cover": "yarn cover:unit && yarn cover:report",
         "cover:report": "nyc --reporter lcov --reporter clover --reporter text --report-dir tests/coverage/all report",
-        "cover:unit": "nyc --no-clean --reporter text yarn test",
+        "cover:unit": "nyc --no-clean --reporter text yarn tests",
         "docs": "typedoc --out docs ./app",
         "format": "prettier --write 'app/{,**/}*.ts' 'tests/{,**/}*.ts'",
         "lint": "eslint './{app,tests}/**/*.ts'",
@@ -41,7 +41,7 @@
         "posttest": "yarn lint",
         "postinstall": "cd ./node_modules/@blok-codes/inversify-oclif-utils && yarn install && yarn build",
         "publish": "yarn build && yarn publish",
-        "prepack": "yarn build && oclif manifest && oclif readme",
+        "prepack": "yarn build && yarn docs",
         "refresh": "yarn clean:all && yarn install && yarn build",
         "semantic-release": "semantic-release --branches main",
         "tests": "jest --colors --silent"

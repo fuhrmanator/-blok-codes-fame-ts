@@ -3,14 +3,14 @@
     "commands": {
         "update": {
             "id": "update",
-            "description": "Update the typescript meta-model interface",
+            "description": "Update the typescript metamodel interface",
             "strict": true,
             "pluginName": "@blok-codes/fame-ts",
             "pluginAlias": "@blok-codes/fame-ts",
             "pluginType": "core",
             "aliases": [],
             "examples": [
-                "$ oex update meta-model --source path/to/file.json\nUpdated meta-model from src to resources/metamodel.json\n"
+                "$ oex update metamodel --source path/to/file.json\nUpdated metamodel from src to resources/metamodel.json\n"
             ],
             "flags": {
                 "source": {
@@ -18,7 +18,7 @@
                     "type": "option",
                     "char": "s",
                     "default": "",
-                    "description": "Path to the typescript meta-model from metamodel.json file",
+                    "description": "Path to the typescript metamodel from metamodel.json file",
                     "required": true,
                     "multiple": false
                 }
@@ -27,7 +27,7 @@
                 {
                     "name": "options",
                     "description": "Which option to update",
-                    "options": ["interface", "meta-model"],
+                    "options": ["interface", "metamodel"],
                     "required": true
                 }
             ]
@@ -41,7 +41,7 @@
             "pluginType": "core",
             "aliases": [],
             "examples": [
-                "$ oex generate api \nGenerated the API from the meta-model to resources/generated/\n"
+                "$ oex generate api \nGenerated the API from the metamodel to resources/generated/\n"
             ],
             "args": [
                 {

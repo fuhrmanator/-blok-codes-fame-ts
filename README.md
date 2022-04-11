@@ -1,7 +1,7 @@
 @blok-codes/fame-ts
 =================
 
-Convert typescript meta-model from json to an api
+Convert typescript metamodel from json to an api
 
 [![Build](https://img.shields.io/github/workflow/status/blok-codes/-blok-codes-fame-ts/main)](https://github.com/blok-codes/-blok-codes-fame-ts)
 [![Version](https://img.shields.io/npm/v/-blok-codes-fame-ts.svg)](https://npmjs.org/package/@blok-codes/fame-ts)
@@ -30,35 +30,56 @@ USAGE
 # Commands
 <!-- commands -->
 * [`fame-ts update [OPTIONS]`](#fame-ts-update-options)
+* [`fame-ts generate [OPTIONS]`](#fame-ts-generate-options)
 * [`fame-ts autocomplete [SHELL]`](#fame-ts-autocomplete-shell)
 * [`fame-ts help [COMMAND]`](#fame-ts-help-command)
 
 ## `fame-ts update [OPTIONS]`
 
-update the typescript meta-model interface
+update the typescript metamodel interface
 
 ```
 USAGE
   $ fame-ts update [OPTIONS] -s <value>
 
 ARGUMENTS
-  OPTIONS  (interface|meta-model) which option to update (updating the meta-model will update the interface as well)
+  OPTIONS  (interface|metamodel) which option to update (updating the metamodel will update the interface as well)
 
 FLAGS
-  -s, --source=<value>  (required) path to the typescript meta-model from metamodel json file
+  -s, --source=<value>  (required) path to the typescript metamodel from metamodel json file
 
 DESCRIPTION
-  Update the typescript meta-model interface
+  Update the typescript metamodel interface
 
 EXAMPLES
-  $ fame-ts update meta-model -s path/to/(meta-model).json
+  $ fame-ts update metamodel -s path/to/(metamodel).json
 
-  $ fame-ts update meta-model --source path/to/(meta-model).json
+  $ fame-ts update metamodel --source path/to/(metamodel).json
 
   $ fame-ts update interface
 ```
 
 _See code: [update command](app/Console/update.ts)_
+
+## `fame-ts generate [OPTIONS]`
+
+update the typescript metamodel interface
+
+```
+USAGE
+  $ fame-ts generate [OPTIONS]
+
+ARGUMENTS
+  OPTIONS  (api) which option to generate (the generation will use the last updated metamodel)
+
+DESCRIPTION
+  Generate an api from the typescript metamodel interface
+
+EXAMPLES
+  $ fame-ts update generate api
+```
+
+_See code: [generate command](app/Console/generate.ts)_
 
 ## `fame-ts autocomplete [SHELL]`
 
