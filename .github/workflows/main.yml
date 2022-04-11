@@ -35,7 +35,7 @@ jobs:
         run: yarn build
 
       - name: generate api
-        run: fame-ts generate api
+        run: yarn generate:api
 
       - name: test
         run: yarn cover
