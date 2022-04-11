@@ -31,11 +31,14 @@ jobs:
       - name: lint
         run: yarn lint
 
-      - name: test
-        run: yarn cover
-
       - name: build
         run: yarn build
+
+      - name: generate api
+        run: fame-ts generate api
+
+      - name: test
+        run: yarn cover
 
   publish-gpr:
     name: publish package on github registry
