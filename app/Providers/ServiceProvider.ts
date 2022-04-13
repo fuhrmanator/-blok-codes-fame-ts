@@ -30,9 +30,11 @@ export class ServiceProvider extends Provider {
     };
 
     private static readonly registerRepository = (bind: interfaces.Bind) => {
-        const sample = fs.readFileSync(settings.getTyped('metamodel').destination, { encoding: 'utf8' });
-        const repository = new Repository(Convert.toTypescriptMetaModel(sample));
+        const sample = fs.readFileSync(settings.getTyped('metamodel').destination, {
+            encoding: 'utf8',
+        });
 
+        const repository = new Repository(Convert.toTypescriptMetaModel(sample));
         bind<Repository>('Repository').toConstantValue(repository);
     };
 

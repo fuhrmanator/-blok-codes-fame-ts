@@ -35,7 +35,7 @@
         "cover:report": "nyc --reporter lcov --reporter clover --reporter text --report-dir tests/coverage/all report",
         "cover:unit": "nyc --no-clean --reporter text yarn tests",
         "docs": "typedoc --out docs ./app",
-        "format": "prettier --write 'app/{,**/}*.ts' 'tests/{,**/}*.ts'",
+        "format": "prettier --write 'app/{,**/}*.ts'",
         "generate:api": "./bin/run generate api",
         "lint": "eslint './{app,tests}/**/*.ts'",
         "lint:fix": "eslint --fix './{app,tests}/**/*.ts'",

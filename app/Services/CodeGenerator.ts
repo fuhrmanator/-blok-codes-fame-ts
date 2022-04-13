@@ -43,7 +43,9 @@ export class CodeGenerator {
 
         metamodel.classes.forEach((clazz) => {
             const path = this.reference.getEntityClassPath(clazz.id);
-            const source = this.project.createSourceFile(`${path}.ts`, '', { overwrite: true });
+            const source = this.project.createSourceFile(`${path}.ts`, '', {
+                overwrite: true,
+            });
 
             if (clazz.FM3 === 'FM3.Trait') {
                 this.acceptTrait(clazz, source);
@@ -58,9 +60,12 @@ export class CodeGenerator {
 
     private readonly acceptClass = (clazz: Class, source: SourceFile): void => {
         this.logger.info(`Class: ${clazz.name}`);
-
         const packageName = this.reference.getEntityName(clazz.package.ref);
-        const classDeclaration = source.addClass({ isExported: true, name: clazz.name });
+
+        const classDeclaration = source.addClass({
+            isExported: true,
+            name: clazz.name,
+        });
 
         clazz.traits?.forEach((trait) => {
             classDeclaration.addImplements(this.addImportDeclaration(trait.ref, source));
@@ -117,9 +122,12 @@ export class CodeGenerator {
         }
 
         this.logger.info(`   Class: ${clazz.name} extends superclass: ${superclass}, ref: ${clazz.superclass.ref}`);
-
         classDeclaration.setExtends(superclass);
-        source.addImportDeclaration({ moduleSpecifier: `../${superclassPath}`, namedImports: [superclass] });
+
+        source.addImportDeclaration({
+            moduleSpecifier: `../${superclassPath}`,
+            namedImports: [superclass],
+        });
     };
 
     private readonly acceptProperty = (
@@ -207,7 +215,13 @@ export class CodeGenerator {
             addSetWithOppositeImportDeclaration(source);
             const className = this.reference.getEntityName(property.class.ref);
 
-            const template = getSetWithOppositeTemplate({ base, className, oppositeName, typeName });
+            const template = getSetWithOppositeTemplate({
+                base,
+                className,
+                oppositeName,
+                typeName,
+            });
+
             propertyDeclaration.setInitializer(template);
         }
 
@@ -238,8 +252,11 @@ export class CodeGenerator {
 
     private readonly acceptTrait = (clazz: Class, source: SourceFile): void => {
         this.logger.info(`Interface: ${clazz.name}`);
+        const interfaceDeclaration = source.addInterface({
+            isExported: true,
+            name: clazz.name,
+        });
 
-        const interfaceDeclaration = source.addInterface({ isExported: true, name: clazz.name });
         assert(clazz.superclass === undefined, `Trait ${clazz.name} has a superclass defined.`);
 
         uniqWith(clazz.properties, (a, b) => a.name === b.name)

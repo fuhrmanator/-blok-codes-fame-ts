@@ -23,8 +23,11 @@ export const buildLogger = (settings: Settings): Logger => {
                 format: combine(align(), printf(formatter), colorize({ all: true })),
             }),
             new DailyRotateFile({ ...rotation, level: levels.info }),
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            new DailyRotateFile({ ...(rotation as any), filename: 'error-%DATE%.log', level: levels.error }),
+            new DailyRotateFile({
+                ...(rotation as any), // eslint-disable-line @typescript-eslint/no-explicit-any
+                filename: 'error-%DATE%.log',
+                level: levels.error,
+            }),
         ],
     });
 

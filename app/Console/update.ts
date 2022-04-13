@@ -46,7 +46,9 @@ export default class Update extends Command {
     };
 
     private readonly copy = async (source: string): Promise<void> => {
-        await fs.copy(source, this.settings.getTyped('metamodel').destination, { overwrite: true });
+        await fs.copy(source, this.settings.getTyped('metamodel').destination, {
+            overwrite: true,
+        });
         this.logger.info(`Updated metamodel from ${source} to ${this.settings.getTyped('metamodel').destination}`);
     };
 
@@ -55,7 +57,10 @@ export default class Update extends Command {
         const encoding = { encoding: 'utf8' };
 
         const sample = await fs.readJson(this.settings.getTyped('metamodel').destination, encoding);
-        const { lines } = await parser.json({ name: options.name, samples: [JSON.stringify(sample)] });
+        const { lines } = await parser.json({
+            name: options.name,
+            samples: [JSON.stringify(sample)],
+        });
 
         await fs.outputFile(options.path, lines.join('\n'), encoding);
         this.logger.info(`Updated ${options.name} interface`);
