@@ -2,7 +2,10 @@ import { buildLogger } from '../../../app/Utils/Logger';
 
 const settings = {
     getTyped: jest.fn((key: string): any =>
-        key === 'app' ? { name: 'test' } : { level: 'info', rotation: { dirname: './logs', filename: 'app-%DATE%.log' } }
+        key === 'app' ? { name: 'test' } : {
+            level: 'info',
+            rotation: { dirname: './logs', filename: 'app-%DATE%.log' }
+        }
     ),
 } as any;
 
@@ -20,6 +23,10 @@ jest.mock('winston', () => {
 });
 
 describe('Logger', () => {
+    afterAll(() => {
+        jest.restoreAllMocks();
+    });
+
     it('should create logger', () => {
         const logger = buildLogger(settings);
 

@@ -13,6 +13,10 @@ jest.mock('@blok-codes/inversify-oclif-utils', () => ({
 }));
 
 describe('Kernel', () => {
+    afterAll(() => {
+        jest.restoreAllMocks();
+    });
+
     it('should be defined', () => {
         expect(kernel).toBeDefined();
     });

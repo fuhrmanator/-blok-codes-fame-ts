@@ -26,8 +26,8 @@ export class Repository {
             throw new DuplicateEntryException(`metamodel id: ${metamodel.id}`, this.map.get(metamodel.id));
         }
 
-        this.map.set(metamodel.id, metamodel);
         metamodel.classes?.forEach((clazz) => this.addClass(clazz));
+        this.map.set(metamodel.id, metamodel);
     };
 
     private readonly addClass = (clazz: Class): void => {
@@ -44,8 +44,8 @@ export class Repository {
             (clazz as any).name = 'BaseObject'; // eslint-disable-line @typescript-eslint/no-explicit-any
         }
 
-        this.map.set(clazz.id, clazz);
         clazz.properties?.forEach((property) => this.addProperty(property));
+        this.map.set(clazz.id, clazz);
     };
 
     private readonly addProperty = (property: Property): void => {

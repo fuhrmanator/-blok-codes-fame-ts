@@ -50,7 +50,7 @@ describe('ProcessHandler', () => {
         expect(onHandler).toHaveBeenCalledWith('SIGINT', expect.any(Function));
         expect(onHandler).toHaveBeenCalledWith('SIGTERM', expect.any(Function));
 
-        await new Promise((resolve) => setTimeout(resolve, 3))
+        await new Promise((resolve) => setTimeout(resolve, 3));
 
         expect(exitHandler).toHaveBeenCalledWith(1);
         expect(logger.info).toHaveBeenCalledWith('🛑 Shutting down application...');

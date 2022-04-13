@@ -54,7 +54,8 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "lint-staged"
+            "pre-commit": "lint-staged",
+            "pre-push": "yarn cover:unit"
         }
     },
     "lint-staged": {
@@ -117,7 +118,6 @@
         "winston-daily-rotate-file": "^4.6.1"
     },
     "devDependencies": {
-        "@oclif/test": "^2.1.0",
         "@types/fs-extra": "^9.0.13",
         "@types/jest": "^27.4.1",
         "@types/lodash": "^4.14.178",

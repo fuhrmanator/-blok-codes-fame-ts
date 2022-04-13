@@ -20,6 +20,10 @@ jest.mock('../../app/Registry', () => ({
 }));
 
 describe('Registry', () => {
+    afterAll(() => {
+        jest.restoreAllMocks();
+    });
+
     it('should be defined', () => {
         expect(Registry).toBeDefined();
     });

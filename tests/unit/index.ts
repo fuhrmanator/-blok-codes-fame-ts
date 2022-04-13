@@ -14,6 +14,10 @@ jest.mock('../../app/Kernel', () => ({
 describe('bootstrap', () => {
     const { run } = require('../../app');
 
+    afterAll(() => {
+        jest.restoreAllMocks();
+    });
+
     it('should be defined', () => {
         expect(run).toBeDefined();
     });
