@@ -45,7 +45,8 @@
         "prepack": "yarn build && yarn docs",
         "refresh": "yarn clean:all && yarn install && yarn build",
         "semantic-release": "semantic-release --branches main",
-        "tests": "jest --colors --silent"
+        "tests": "jest --colors --silent",
+        "prepare": "husky install"
     },
     "config": {
         "commitizen": {
