@@ -1,4 +1,5 @@
 .eslintrc.js
+jest.config.js
 /tests
 /config
 node_modules

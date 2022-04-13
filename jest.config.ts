@@ -24,6 +24,7 @@ export default {
       '/config/',
       '/dist/',
       '/node_modules/',
+      '/tests/coverage/',
     ],
 
     // A map from regular expressions to paths to transformer
