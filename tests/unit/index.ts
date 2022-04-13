@@ -27,4 +27,3 @@ describe('bootstrap', () => {
         expect(start).toHaveBeenCalled();
     });
 });
-

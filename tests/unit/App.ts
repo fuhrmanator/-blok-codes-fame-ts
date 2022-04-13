@@ -13,7 +13,7 @@ const container = {
     get: <T = any>(key: string) => {
         if (key === 'Logger') return logger;
         return handler;
-    }
+    },
 } as any;
 
 describe('App', () => {
@@ -22,7 +22,7 @@ describe('App', () => {
     });
 
     it('should start', () => {
-        (new App(container)).start();
+        new App(container).start();
 
         expect(logger.info).toHaveBeenCalledWith('🚀 Starting application...');
         expect(handler.handleErrors).toHaveBeenCalled();

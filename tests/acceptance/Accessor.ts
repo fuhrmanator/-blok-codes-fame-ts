@@ -16,8 +16,8 @@ describe('accessors', () => {
     const reference = kernel.get<Reference>('Reference');
     const settings = kernel.get<Settings>('Settings');
 
-    const classAccessors: { clazz: string; name: string; }[] = [];
-    const traitAccessors: { clazz: string; name: string; }[] = [];
+    const classAccessors: { clazz: string; name: string }[] = [];
+    const traitAccessors: { clazz: string; name: string }[] = [];
 
     beforeAll(() => {
         project.addSourceFilesAtPaths(settings.getTyped('metamodel').target + '**/**/*{.d.ts,.ts}');
@@ -30,7 +30,10 @@ describe('accessors', () => {
             metamodel.classes.forEach((clazz) => {
                 clazz.properties?.forEach((property) => {
                     const accessors = clazz.FM3 === FM3_TRAIT ? traitAccessors : classAccessors;
-                    accessors.push({ clazz: clazz.name === 'Object' ? 'MockObject' : clazz.name, name: property.name });
+                    accessors.push({
+                        clazz: clazz.name === 'Object' ? 'MockObject' : clazz.name,
+                        name: property.name,
+                    });
                 });
             });
         });

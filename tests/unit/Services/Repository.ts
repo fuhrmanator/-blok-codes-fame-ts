@@ -6,14 +6,15 @@ import { Class, Convert, Property, TypescriptMetaModel } from '../../../app/Serv
 import { Repository } from '../../../app/Services/Repository';
 import { settings } from '../../../app/Utils/Settings';
 
-
 describe('Repository', () => {
     let repository: Repository;
     let metamodels: TypescriptMetaModel[];
 
     beforeAll(() => {
         metamodels = Convert.toTypescriptMetaModel(
-            fs.readFileSync(settings.getTyped('metamodel').destination, { encoding: 'utf8' })
+            fs.readFileSync(settings.getTyped('metamodel').destination, {
+                encoding: 'utf8',
+            })
         );
     });
 
@@ -44,11 +45,9 @@ describe('Repository', () => {
         repository.add(mock);
         expect((repository.get(1) as any).name).toEqual('MockMetaModel');
 
-        expect(() => repository.add(mock))
-            .toThrowError(`Duplicate metamodel id: 1 as ${JSON.stringify(mock)}`);
+        expect(() => repository.add(mock)).toThrowError(`Duplicate metamodel id: 1 as ${JSON.stringify(mock)}`);
 
-        expect(() => repository.add(mock))
-            .toThrowError(DuplicateEntryException);
+        expect(() => repository.add(mock)).toThrowError(DuplicateEntryException);
     });
 
     it('should add metamodel classes', () => {
@@ -63,20 +62,21 @@ describe('Repository', () => {
                     name: 'MockClass',
                     package: {
                         ref: 1,
-                    }
-                }
-            ]
+                    },
+                },
+            ],
         };
+
         repository.add(mock);
 
         expect((repository.get(999) as any).name).toEqual('MockClass');
         mock.id = 2;
 
-        expect(() => repository.add(mock))
-            .toThrowError(`Duplicate class id: 999 as ${JSON.stringify(mock.classes[0])}`);
+        expect(() => repository.add(mock)).toThrowError(
+            `Duplicate class id: 999 as ${JSON.stringify(mock.classes[0])}`
+        );
 
-        expect(() => repository.add(mock))
-            .toThrowError(DuplicateEntryException);
+        expect(() => repository.add(mock)).toThrowError(DuplicateEntryException);
     });
 
     it('should add metamodel trait', () => {
@@ -91,9 +91,9 @@ describe('Repository', () => {
                     name: 'MockClass',
                     package: {
                         ref: 1,
-                    }
-                }
-            ]
+                    },
+                },
+            ],
         };
 
         repository.add(mock);
@@ -112,9 +112,9 @@ describe('Repository', () => {
                     name: 'Object',
                     package: {
                         ref: 1,
-                    }
-                }
-            ]
+                    },
+                },
+            ],
         };
 
         repository.add(mock);
@@ -127,17 +127,17 @@ describe('Repository', () => {
             id: 888,
             name: 'argumentsInParameterizedTypes',
             class: {
-                ref: 2
+                ref: 2,
             },
             container: false,
             derived: true,
             multivalued: true,
             opposite: {
-                ref: 4
+                ref: 4,
             },
             type: {
-                ref: 5
-            }
+                ref: 5,
+            },
         };
 
         const clazz: Class = {
@@ -163,17 +163,15 @@ describe('Repository', () => {
         mock.id = 2;
         clazz.id = 2;
 
-        expect(() => repository.add(mock))
-            .toThrowError(`Duplicate property id: 888 as ${JSON.stringify(property)}`);
+        expect(() => repository.add(mock)).toThrowError(`Duplicate property id: 888 as ${JSON.stringify(property)}`);
 
-        expect(() => repository.add(mock))
-            .toThrowError(DuplicateEntryException);
+        expect(() => repository.add(mock)).toThrowError(DuplicateEntryException);
     });
 
     it('should add all metamodels', () => {
         repository.addAll(metamodels);
 
-        metamodels.forEach(metamodel => {
+        metamodels.forEach((metamodel) => {
             expect(repository.get(metamodel.id)).toBeDefined();
         });
     });
