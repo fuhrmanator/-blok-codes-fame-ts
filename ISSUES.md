@@ -1,8 +1,8 @@
 # Issues
 
 ## Known issues with inheritance and implementation of interfaces
-- [ ] resources/generated/FamixTypeScript/\*.ts - Class '(.\*)' incorrectly implements interface 'T(.\*)'.
-- [ ] resources/generated/Moose/Model.ts - Class 'Model' incorrectly extends base class 'AbstractGroup'. Types have separate declarations of a private property '_numberOfLinesOfCode'.
+- [x] ~~resources/generated/FamixTypeScript/\*.ts - Class '(.\*)' incorrectly implements interface 'T(.\*)'.~~
+- [x] ~~resources/generated/Moose/Model.ts - Class 'Model' incorrectly extends base class 'AbstractGroup'. Types have separate declarations of a private property '_numberOfLinesOfCode'.~~
 
 ## Known classes issues
 - [x] ~~resources/generated/Famix-Traits/TypeGroup.ts - Duplicate identifier 'averageNumberOfMethods'.~~

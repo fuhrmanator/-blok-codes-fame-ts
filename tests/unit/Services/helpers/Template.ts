@@ -21,7 +21,7 @@ describe('Template', () => {
                 `    value.WithoutTest = this.context;\n` +
                 `    return this;\n` +
                 `  }\n` +
-                `}(this) /* pass outer this */`
+                `}(this as any) /* pass outer this */`
         );
     });
 
@@ -37,14 +37,18 @@ describe('Template', () => {
             `new class extends SetWithOpposite<Test> {\n` +
                 `  constructor(private context: Test) { super(); }\n` +
                 `  clearOpposite(value: Test): this {\n` +
-                `    value.WithoutTest.delete(this.context);\n` +
+                `    const set = new Set(value.WithoutTest);\n` +
+                `    set.delete(this.context);\n` +
+                `    value.WithoutTest = [...set];\n` +
                 `    return this;\n` +
                 `  }\n` +
                 `  setOpposite(value: Test): this {\n` +
-                `    value.WithoutTest.add(this.context);\n` +
+                `    const set = new Set(value.WithoutTest);\n` +
+                `    set.add(this.context);\n` +
+                `    value.WithoutTest = [...set];\n` +
                 `    return this;\n` +
                 `  }\n` +
-                `}(this) /* pass outer this */`
+                `}(this as any) /* pass outer this */`
         );
     });
 
@@ -61,12 +65,12 @@ describe('Template', () => {
             getAccessor: {
                 name: 'test',
                 returnType: 'Test',
-                statements: ['return this._test'],
+                statements: ['return this._test;'],
             },
             setAccessor: {
                 name: 'test',
                 parameters: [{ name: 'theTest', type: 'Test | undefined' }],
-                statements: ['this._test = theTest'],
+                statements: ['this._test = theTest;'],
             },
         });
     });
@@ -83,12 +87,12 @@ describe('Template', () => {
         expect(getAccessorsDefinitionTemplate(param)).toEqual({
             getAccessor: {
                 name: 'test',
-                returnType: 'Set<Test>',
-                statements: ['return this._test'],
+                returnType: 'Test[]',
+                statements: ['return [...this._test];'],
             },
             setAccessor: {
                 name: 'test',
-                parameters: [{ name: 'theTestSet', type: 'Set<Test>' }],
+                parameters: [{ name: 'theTestSet', type: 'Test[]' }],
                 statements: ['this._test = JSON.parse(JSON.stringify(theTestSet)); //deep copy'],
             },
         });
@@ -107,11 +111,11 @@ describe('Template', () => {
             getAccessor: {
                 name: 'test',
                 returnType: 'Test',
-                statements: ['return this._test'],
+                statements: ['return this._test;'],
             },
             setAccessor: {
                 name: 'test',
-                parameters: [{ name: 'theTestSet', type: 'Set<Test>' }],
+                parameters: [{ name: 'theTestSet', type: 'Test[]' }],
                 statements: ['this._test = JSON.parse(JSON.stringify(theTestSet)); // deep copy'],
             },
         });
@@ -129,8 +133,8 @@ describe('Template', () => {
         expect(getAccessorsDefinitionTemplate(param)).toEqual({
             getAccessor: {
                 name: 'test',
-                returnType: 'Set<Test>',
-                statements: ['return this._test'],
+                returnType: 'Test[]',
+                statements: ['return [...this._test];'],
             },
             setAccessor: {
                 name: 'test',
@@ -138,11 +142,15 @@ describe('Template', () => {
                 statements: [
                     `if (this._test != null) {`,
                     `   if (this._test === theTestSet) return;`,
-                    `   this._test.WithoutTest.delete(this);`,
+                    `   const set = new Set(this._test.WithoutTest);`,
+                    `   set.delete(this);`,
+                    `   this._test.WithoutTest = [...set];`,
                     `}`,
                     `this._test = theTestSet;`,
                     `if (theTestSet == null) return;`,
-                    `theTestSet.WithoutTest.add(this);`,
+                    `const set = new Set(theTestSet.WithoutTest);`,
+                    `set.add(this);`,
+                    `theTestSet.WithoutTest = [...set];`,
                 ],
             },
         });
@@ -161,13 +169,13 @@ describe('Template', () => {
             getAccessor: {
                 name: 'test',
                 returnType: 'Test',
-                statements: ['return this._test'],
+                statements: ['return this._test;'],
             },
             setAccessor: {
                 name: 'test',
                 parameters: [{ name: 'theTestSet', type: 'Test | undefined' }],
                 statements: [
-                    `if (this._test == null ? theTestSet !== null : !this._test === theTestSet) {`,
+                    `if (this._test == null ? theTestSet !== null : this._test !== theTestSet) {`,
                     `  const old_test = this._test;`,
                     `  this._test = theTestSet;`,
                     `  if (old_test !== null) old_test.WithoutTest = null;`,
@@ -191,11 +199,11 @@ describe('Template', () => {
             getAccessor: {
                 name: 'test',
                 returnType: 'Test',
-                statements: ['return this._test'],
+                statements: ['return this._test;'],
             },
             setAccessor: {
                 name: 'test',
-                parameters: [{ name: 'theTestSet', type: 'Set<Test>' }],
+                parameters: [{ name: 'theTestSet', type: 'Test[]' }],
                 statements: ['this._test = JSON.parse(JSON.stringify(theTestSet)); // deep copy'],
             },
         });

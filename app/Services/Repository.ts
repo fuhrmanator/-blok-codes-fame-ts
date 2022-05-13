@@ -58,6 +58,7 @@ export class Repository {
 
     public readonly get = (key: number | RefEnum): Stored => {
         if (!this.map.has(key)) {
+            console.log(`*********************************key: ${key}`);
             throw new NotFoundException(`Unknown ${key}`);
         }
 

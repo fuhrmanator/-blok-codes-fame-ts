@@ -67,13 +67,43 @@ export class CodeGenerator {
             name: clazz.name,
         });
 
-        clazz.traits?.forEach((trait) => {
-            classDeclaration.addImplements(this.addImportDeclaration(trait.ref, source));
-        });
+        let traits = clazz.traits;
+        let properties = uniqWith(clazz.properties, (a, b) => a.name === b.name);
 
         if (clazz.superclass !== undefined && (packageName !== 'Moose' || clazz.name !== 'BaseObject')) {
             this.acceptSuperclass(clazz, source, classDeclaration);
+
+            let superclass = clazz.superclass;
+            const parentClasses: Class[] = [];
+
+            while (superclass && superclass?.ref !== 'Object') {
+                const entity = this.reference.getEntity(superclass.ref) as Class;
+                parentClasses.push(entity);
+                superclass = entity.superclass;
+            }
+
+            traits = traits?.filter(
+                (trait) =>
+                    !parentClasses.filter((superclass) => superclass.traits?.some((t) => t.ref === trait.ref)).length
+            );
+
+            properties = properties?.filter(
+                (property) =>
+                    !parentClasses.filter((superclass) => superclass.properties?.some((p) => p.name === property.name))
+                        .length
+            );
         }
+
+        traits?.forEach((trait) => {
+            classDeclaration.addImplements(this.addImportDeclaration(trait.ref, source));
+            const entity = this.reference.getEntity(trait.ref) as Class;
+
+            uniqWith(entity.properties, (a, b) => a.name === b.name)
+                ?.sort((a, b) => a.name.localeCompare(b.name))
+                .forEach((property) => {
+                    this.acceptProperty(property, source, classDeclaration);
+                });
+        });
 
         if (clazz.name === 'BaseObject') {
             classDeclaration.setExtends('Object'); // Extends TypeScript's built-in Object class
@@ -82,7 +112,7 @@ export class CodeGenerator {
         const addPropertiesToExporterStatements: string[] = [];
         addFamixMSEExporterImportDeclaration(source);
 
-        uniqWith(clazz.properties, (a, b) => a.name === b.name)
+        properties
             ?.sort((a, b) => a.name.localeCompare(b.name))
             .forEach((property) => {
                 this.acceptProperty(property, source, classDeclaration);
