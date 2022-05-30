@@ -37,15 +37,11 @@ describe('Template', () => {
             `new class extends SetWithOpposite<Test> {\n` +
                 `  constructor(private context: Test) { super(); }\n` +
                 `  clearOpposite(value: Test): this {\n` +
-                `    const set = new Set(value.WithoutTest);\n` +
-                `    set.delete(this.context);\n` +
-                `    value.WithoutTest = [...set];\n` +
+                `    value.WithoutTest.delete(this.context);\n` +
                 `    return this;\n` +
                 `  }\n` +
                 `  setOpposite(value: Test): this {\n` +
-                `    const set = new Set(value.WithoutTest);\n` +
-                `    set.add(this.context);\n` +
-                `    value.WithoutTest = [...set];\n` +
+                `    value.WithoutTest.add(this.context);\n` +
                 `    return this;\n` +
                 `  }\n` +
                 `}(this as any) /* pass outer this */`
@@ -87,12 +83,12 @@ describe('Template', () => {
         expect(getAccessorsDefinitionTemplate(param)).toEqual({
             getAccessor: {
                 name: 'test',
-                returnType: 'Test[]',
-                statements: ['return [...this._test];'],
+                returnType: 'Set<Test>',
+                statements: ['return this._test;'],
             },
             setAccessor: {
                 name: 'test',
-                parameters: [{ name: 'theTestSet', type: 'Test[]' }],
+                parameters: [{ name: 'theTestSet', type: 'Set<Test>' }],
                 statements: ['this._test = JSON.parse(JSON.stringify(theTestSet)); //deep copy'],
             },
         });
@@ -115,7 +111,7 @@ describe('Template', () => {
             },
             setAccessor: {
                 name: 'test',
-                parameters: [{ name: 'theTestSet', type: 'Test[]' }],
+                parameters: [{ name: 'theTestSet', type: 'Set<Test>' }],
                 statements: ['this._test = JSON.parse(JSON.stringify(theTestSet)); // deep copy'],
             },
         });
@@ -133,8 +129,8 @@ describe('Template', () => {
         expect(getAccessorsDefinitionTemplate(param)).toEqual({
             getAccessor: {
                 name: 'test',
-                returnType: 'Test[]',
-                statements: ['return [...this._test];'],
+                returnType: 'Set<Test>',
+                statements: ['return this._test;'],
             },
             setAccessor: {
                 name: 'test',
@@ -142,15 +138,11 @@ describe('Template', () => {
                 statements: [
                     `if (this._test != null) {`,
                     `   if (this._test === theTestSet) return;`,
-                    `   const set = new Set(this._test.WithoutTest);`,
-                    `   set.delete(this);`,
-                    `   this._test.WithoutTest = [...set];`,
+                    `   this._test.WithoutTest.delete(this);`,
                     `}`,
                     `this._test = theTestSet;`,
                     `if (theTestSet == null) return;`,
-                    `const set = new Set(theTestSet.WithoutTest);`,
-                    `set.add(this);`,
-                    `theTestSet.WithoutTest = [...set];`,
+                    `theTestSet.WithoutTest.add(this);`,
                 ],
             },
         });
@@ -203,7 +195,7 @@ describe('Template', () => {
             },
             setAccessor: {
                 name: 'test',
-                parameters: [{ name: 'theTestSet', type: 'Test[]' }],
+                parameters: [{ name: 'theTestSet', type: 'Set<Test>' }],
                 statements: ['this._test = JSON.parse(JSON.stringify(theTestSet)); // deep copy'],
             },
         });

@@ -6,7 +6,7 @@ export abstract class SetWithOpposite<T> extends Set {
 
     public abstract setOpposite(value: T): this;
 
-    constructor(values?: readonly T[] | null) {
+    protected constructor(values?: readonly T[] | null) {
         super();
         values?.forEach((value) => this.add(value));
     }

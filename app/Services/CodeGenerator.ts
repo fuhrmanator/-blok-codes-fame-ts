@@ -335,7 +335,7 @@ export class CodeGenerator {
 
         interfaceDeclaration.addProperty({
             name: property.name,
-            type: property.multivalued ? `${typeName}[]` : typeName,
+            type: property.multivalued ? `Set<${typeName}>` : typeName,
         });
     };
 
@@ -353,7 +353,7 @@ export class CodeGenerator {
 
         interfaceDeclaration.addProperty({
             name: property.name,
-            type: property.multivalued ? `${typeName}[]` : typeName,
+            type: property.multivalued ? `Set<${typeName}>` : typeName,
         });
     };
 
