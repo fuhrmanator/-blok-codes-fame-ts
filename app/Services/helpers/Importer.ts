@@ -21,8 +21,8 @@ export const addFamePropertyImportDeclaration = (source: SourceFile): void => {
     addNamedImportDeclaration(source, 'FameProperty', '../Decorators');
 };
 
-export const addFamixMSEExporterImportDeclaration = (source: SourceFile): void => {
-    addNamedImportDeclaration(source, 'FamixMSEExporter', '../FamixMSEExporter');
+export const addFamixJSONExporterImportDeclaration = (source: SourceFile): void => {
+    addNamedImportDeclaration(source, 'FamixJSONExporter', '../FamixJSONExporter');
 };
 
 export const addSetWithOppositeImportDeclaration = (source: SourceFile): void => {

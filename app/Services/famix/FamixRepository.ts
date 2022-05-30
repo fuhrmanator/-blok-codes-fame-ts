@@ -18,9 +18,13 @@ export class FamixRepository {
         return this.instance;
     };
 
+    public static readonly getFamixRepo = (): FamixRepository => this.getInstance();
+
     public static readonly clear = (): void => {
         this.instance = new FamixRepository();
     };
+
+    public static readonly clearFamixRepo = (): void => this.clear();
 
     public readonly createOrGetFamixClass = (name: string, isInterface?: boolean): FamixElement => {
         let instance = this.getFamixClass(name);
@@ -28,9 +32,9 @@ export class FamixRepository {
         if (!instance) {
             instance = createDynamicInstance<FamixElement>(this, 'BaseElement');
 
-            (instance as any).name = name.toLowerCase();
-            (instance as any).isStub = true;
-            (instance as any).isInterface = isInterface;
+            (instance as any).setName(name.toLowerCase());
+            (instance as any).setIsStub(true);
+            (instance as any).setIsInterface(!!isInterface);
         }
 
         return instance;
@@ -46,8 +50,21 @@ export class FamixRepository {
         return undefined;
     };
 
+    public readonly getFamixElementById = (id: number): FamixBaseElement | undefined =>
+        Array.from(this.elements.values()).find((element) => element.id == id);
+
+    public readonly getFamixElementByFullyQualifiedName = (name: string): FamixBaseElement | undefined =>
+        Array.from(this.elements.values())
+            .filter(
+                (element) =>
+                    (element as any).constructor.name == 'Method' ||
+                    (element as any).constructor.name == 'Function' ||
+                    (element as any).constructor.name == 'Namespace'
+            )
+            .find((element) => (element as any).getFullyQualifiedName() == name);
+
     public readonly addElement = (element: FamixBaseElement): void => {
-        if (isInstanceOf<FamixElement>(element, ['getMSE', 'addPropertiesToExporter'])) {
+        if (isInstanceOf<FamixElement>(element, ['getJSON', 'addPropertiesToExporter'])) {
             this.classes.add(element);
         } else {
             this.elements.add(element);
@@ -56,17 +73,18 @@ export class FamixRepository {
         element.id = ++this.counter;
     };
 
-    public readonly getMSE = (): string => {
-        let mse = '(';
+    public readonly getJSON = (): string => {
+        let buffer = '[';
 
         for (const clazz of this.classes) {
-            mse += clazz.getMSE();
+            buffer += clazz.getJSON() + ',';
         }
 
         for (const element of this.elements) {
-            mse += element.getMSE();
+            buffer += element.getJSON() + ',';
         }
 
-        return mse + ')';
+        buffer = buffer.substring(0, buffer.length - 1);
+        return buffer + ']';
     };
 }

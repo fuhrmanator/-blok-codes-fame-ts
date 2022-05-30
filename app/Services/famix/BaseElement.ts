@@ -1,7 +1,7 @@
-import { FamixMSEExporter } from './FamixMSEExporter';
+import { FamixJSONExporter } from './FamixJSONExporter';
 
 export interface BaseElement {
-    getMSE(): string;
+    getJSON(): string;
 
-    addPropertiesToExporter(exporter: FamixMSEExporter): void;
+    addPropertiesToExporter(exporter: FamixJSONExporter): void;
 }

@@ -7,7 +7,7 @@ import { Logger } from 'winston';
 import { Class, Property, RefEnum, TypescriptMetaModel } from './generated/TypescriptMetaModel';
 import {
     addFamePropertyImportDeclaration,
-    addFamixMSEExporterImportDeclaration,
+    addFamixJSONExporterImportDeclaration,
     addNamedImportDeclaration,
     addSetWithOppositeImportDeclaration,
     getAccessorsDefinitionTemplate,
@@ -110,7 +110,7 @@ export class CodeGenerator {
         }
 
         const addPropertiesToExporterStatements: string[] = [];
-        addFamixMSEExporterImportDeclaration(source);
+        addFamixJSONExporterImportDeclaration(source);
 
         properties
             ?.sort((a, b) => a.name.localeCompare(b.name))
@@ -118,22 +118,22 @@ export class CodeGenerator {
                 this.acceptProperty(property, source, classDeclaration);
 
                 addPropertiesToExporterStatements.push(
-                    `exporter.addProperty("${property.name}", this.${property.name})`
+                    `exporter.addProperty("${property.name}", this.${property.name});`
                 );
             });
 
         classDeclaration.addMethod({
             name: 'addPropertiesToExporter',
-            parameters: [{ name: 'exporter', type: 'FamixMSEExporter' }],
+            parameters: [{ name: 'exporter', type: 'FamixJSONExporter' }],
             statements: uniq(addPropertiesToExporterStatements),
         });
 
         classDeclaration.addMethod({
-            name: 'getMSE',
+            name: 'getJSON',
             statements: [
-                `const mse: FamixMSEExporter = new FamixMSEExporter("${packageName}.${clazz.name}", this)`,
-                `this.addPropertiesToExporter(mse)`,
-                `return mse.getMSE()`,
+                `const exporter: FamixJSONExporter = new FamixJSONExporter("${packageName}.${clazz.name}", this);`,
+                `this.addPropertiesToExporter(exporter);`,
+                `return exporter.getJSON();`,
             ],
         });
     };
@@ -213,7 +213,7 @@ export class CodeGenerator {
                 property.container ? ', derived = true, container = true' : ', derived = true'
             })`,
             '// TODO: this is a derived property; implement this method manually', // TODO: how to implement this?
-            `throw new Error('Function not implemented.')`,
+            `throw new Error('Function not implemented.');`,
         ]);
     };
 

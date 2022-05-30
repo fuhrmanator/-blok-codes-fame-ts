@@ -1,15 +1,15 @@
 import { BaseElement } from './BaseElement';
-import { FamixMSEExporter } from './FamixMSEExporter';
+import { FamixJSONExporter } from './FamixJSONExporter';
 import { FamixRepository } from './FamixRepository';
 
 export abstract class FamixBaseElement implements BaseElement {
     id: number | undefined;
 
-    constructor(repository: FamixRepository) {
+    protected constructor(repository: FamixRepository) {
         repository.addElement(this);
     }
 
-    abstract getMSE(): string;
+    abstract getJSON(): string;
 
-    abstract addPropertiesToExporter(exporter: FamixMSEExporter): void;
+    abstract addPropertiesToExporter(exporter: FamixJSONExporter): void;
 }
