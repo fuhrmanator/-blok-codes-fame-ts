@@ -152,6 +152,7 @@ module.exports = {
                 'tabs': true,
                 'tabWidth': 4,
                 'semi': true,
+                'endOfLine': 'auto',
             },
         ],
         'simple-import-sort/imports': 'error',
