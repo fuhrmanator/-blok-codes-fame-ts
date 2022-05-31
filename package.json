@@ -36,7 +36,7 @@
         "cover:unit": "nyc --no-clean --reporter text yarn tests",
         "docs": "typedoc --out docs ./app",
         "format": "prettier --config .prettierrc --write \"app/{,**/}*.ts\" \"tests/{,**/}*.ts\"",
-        "generate:api": "./bin/run generate api",
+        "generate:api": "node ./bin/run generate api",
         "lint": "eslint -c .eslintrc.js \"./{app,tests}/**/*.ts\"",
         "lint:fix": "eslint -c .eslintrc.js --fix \"./{app,tests}/**/*.ts\"",
         "posttest": "yarn lint",
