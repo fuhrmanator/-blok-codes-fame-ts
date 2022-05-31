@@ -99,9 +99,11 @@ describe('Reference', () => {
 
     it('should get entity class path', () => {
         repository.add(metamodels[0]);
+        const classPath = reference.getEntityClassPath(metamodels[0].classes[0].id);
 
-        expect(reference.getEntityClassPath(metamodels[0].classes[0].id)).toContain(
-            'resources/generated/Famix-Traits/TParameterizedTypeUser'
-        );
+        const unixPath = 'resources/generated/Famix-Traits/TParameterizedTypeUser';
+        const windowsPath = 'resources\\generated\\Famix-Traits\\TParameterizedTypeUser';
+
+        expect(classPath.includes(unixPath) || classPath.includes(windowsPath)).toBeTruthy();
     });
 });
