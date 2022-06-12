@@ -5,11 +5,11 @@ import { FamixRepository } from './FamixRepository';
 export abstract class FamixBaseElement implements BaseElement {
     id: number | undefined;
 
-    protected constructor(repository: FamixRepository) {
+    constructor(repository: FamixRepository) {
         repository.addElement(this);
     }
 
-    abstract getJSON(): string;
+    abstract toJSON(): string;
 
     abstract addPropertiesToExporter(exporter: FamixJSONExporter): void;
 }

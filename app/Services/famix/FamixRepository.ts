@@ -7,7 +7,7 @@ export class FamixRepository {
     private classes: Set<FamixElement> = new Set<FamixElement>();
     private elements: Set<FamixBaseElement> = new Set<FamixBaseElement>();
 
-    private counter = 1;
+    private counter = 0;
     private static instance: FamixRepository;
 
     public static readonly getInstance = (): FamixRepository => {
@@ -64,7 +64,7 @@ export class FamixRepository {
             .find((element) => (element as any).getFullyQualifiedName() == name);
 
     public readonly addElement = (element: FamixBaseElement): void => {
-        if (isInstanceOf<FamixElement>(element, ['getJSON', 'addPropertiesToExporter'])) {
+        if (isInstanceOf<FamixElement>(element, ['toJSON', 'addPropertiesToExporter'])) {
             this.classes.add(element);
         } else {
             this.elements.add(element);
@@ -73,15 +73,15 @@ export class FamixRepository {
         element.id = ++this.counter;
     };
 
-    public readonly getJSON = (): string => {
+    public readonly toJSON = (): string => {
         let buffer = '[';
 
         for (const clazz of this.classes) {
-            buffer += clazz.getJSON() + ',';
+            buffer += clazz.toJSON() + ',';
         }
 
         for (const element of this.elements) {
-            buffer += element.getJSON() + ',';
+            buffer += element.toJSON() + ',';
         }
 
         buffer = buffer.substring(0, buffer.length - 1);

@@ -129,11 +129,11 @@ export class CodeGenerator {
         });
 
         classDeclaration.addMethod({
-            name: 'getJSON',
+            name: 'toJSON',
             statements: [
                 `const exporter: FamixJSONExporter = new FamixJSONExporter("${packageName}.${clazz.name}", this);`,
                 `this.addPropertiesToExporter(exporter);`,
-                `return exporter.getJSON();`,
+                `return exporter.toJSON();`,
             ],
         });
     };

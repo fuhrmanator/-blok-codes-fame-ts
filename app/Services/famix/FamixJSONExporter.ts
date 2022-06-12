@@ -50,9 +50,9 @@ export class FamixJSONExporter {
         return properties;
     };
 
-    public readonly getJSON = (): string => JSON.stringify(this.buffer);
+    public readonly toJSON = (): string => JSON.stringify(this.buffer);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     private readonly isFamixElement = (value: any): value is FamixElement =>
-        isInstanceOf<FamixElement>(value, ['getJSON', 'addPropertiesToExporter']);
+        isInstanceOf<FamixElement>(value, ['toJSON', 'addPropertiesToExporter']);
 }

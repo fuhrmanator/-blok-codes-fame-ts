@@ -39,11 +39,29 @@ describe('accessors', () => {
         });
     });
 
-    it.skip('should have all class accessors', () => {
-        // todo - recursively get the properties of parent classes and test at least one implements the accessor
+    it('should have all class accessors', () => {
         classAccessors.forEach(({ clazz, name }) => {
-            const source = files.find((file) => file.getClass(clazz) && file.getClass(clazz).getGetAccessor(name));
-            expect(source).toBeDefined();
+            const source = files.some((file) => {
+                const fileClass = file.getClass(clazz);
+
+                if (!fileClass) {
+                    return false;
+                }
+
+                if (fileClass.getGetAccessor(name)) {
+                    return true;
+                }
+
+                return !!fileClass.getParentWhile(
+                    (parent) =>
+                        !parent
+                            .getSourceFile()
+                            .getClasses()
+                            .some((clazz) => clazz.getGetAccessor(name))
+                );
+            });
+
+            expect(source).toBeTruthy();
         });
     });
 
