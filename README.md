@@ -1,5 +1,6 @@
 [![CI](https://github.com/blok-codes/-blok-codes-fame-ts/actions/workflows/main.yml/badge.svg)](https://github.com/blok-codes/-blok-codes-fame-ts/actions/workflows/main.yml)
-[![Version](https://img.shields.io/npm/v/-blok-codes-fame-ts.svg)](https://npmjs.org/package/@blok-codes/fame-ts)
+[![Version](https://img.shields.io/npm/v/@blok-codes/fame-ts.svg)](https://www.npmjs.com/package/@blok-codes/fame-ts)
+[![Node](https://img.shields.io/node/v/@blok-codes/fame-ts.svg)](https://nodejs.org/download/release/latest-v16.x/)
 ![GitHub](https://img.shields.io/github/license/blok-codes/-blok-codes-fame-ts)
 
 @blok-codes/fame-ts
@@ -7,14 +8,13 @@
 
     Convert typescript metamodel from json to an api
 
+<br/>
 
 <!-- toc -->
 * [Usage](#usage)
 * [Commands](#commands)
 <!-- tocstop -->
-<br/>
 
-    node >= 16
 
 
 # Usage
