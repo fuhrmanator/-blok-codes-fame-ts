@@ -1,17 +1,21 @@
-@blok-codes/fame-ts
-=================
-
-Convert typescript metamodel from json to an api
-
-[![Build](https://img.shields.io/github/workflow/status/blok-codes/-blok-codes-fame-ts/main)](https://github.com/blok-codes/-blok-codes-fame-ts)
 [![CI](https://github.com/blok-codes/-blok-codes-fame-ts/actions/workflows/main.yml/badge.svg)](https://github.com/blok-codes/-blok-codes-fame-ts/actions/workflows/main.yml)
 [![Version](https://img.shields.io/npm/v/-blok-codes-fame-ts.svg)](https://npmjs.org/package/@blok-codes/fame-ts)
 ![GitHub](https://img.shields.io/github/license/blok-codes/-blok-codes-fame-ts)
+
+@blok-codes/fame-ts
+=================
+
+    Convert typescript metamodel from json to an api
+
 
 <!-- toc -->
 * [Usage](#usage)
 * [Commands](#commands)
 <!-- tocstop -->
+<br/>
+
+    node >= 16
+
 
 # Usage
 <!-- usage -->
