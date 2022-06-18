@@ -5,7 +5,8 @@ import { format } from 'winston';
 import { env } from './env-loader';
 import { levels, Settings } from './Settings';
 
-const { name, version } = require('../package.json');
+const relativePath = env('NODE_ENV') === 'production' ? '../..' : '..';
+const { name, version } = require(`${relativePath}/package.json`);
 
 process.env.npm_package_name = name;
 process.env.npm_package_version = version;
@@ -25,7 +26,7 @@ const config: Settings = {
         level: levels.debug,
         rotation: {
             datePattern: 'YYYY-MM-DD-HH',
-            dirname: path.resolve(__dirname, `../logs`),
+            dirname: path.resolve(__dirname, `${relativePath}/logs`),
             filename: 'app-%DATE%.log',
             format: format.logstash(),
             json: true,
@@ -35,14 +36,14 @@ const config: Settings = {
         },
     },
     metamodel: {
-        destination: path.resolve(__dirname, `../resources/metamodel.json`),
-        target: path.resolve(__dirname, `../resources/generated/`),
+        destination: path.resolve(__dirname, `${relativePath}/resources/metamodel.json`),
+        target: path.resolve(__dirname, `${relativePath}/resources/generated/`),
         interface: {
             name: '[typescript]-[meta]-[model]',
             path: path.resolve(__dirname, `../app/Services/generated/TypescriptMetaModel.ts`),
-        }
+        },
     },
-    tsConfigFilePath: path.resolve(__dirname, `../tsconfig.json`),
+    tsConfigFilePath: path.resolve(__dirname, `${relativePath}/tsconfig.json`),
     shutdownWaitTimeout: +env('SHUTDOWN_WAIT_TIMEOUT', 10), // seconds
 };
 

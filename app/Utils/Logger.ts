@@ -1,6 +1,7 @@
 import { TransformableInfo } from 'logform';
 import { addColors, config, createLogger, format, Logger, transports } from 'winston';
 import DailyRotateFile from 'winston-daily-rotate-file';
+import TransportStream from 'winston-transport';
 
 import { levels, Settings } from './Settings';
 
@@ -10,7 +11,23 @@ const formatter = (info: TransformableInfo): string => `${info.timestamp} ${info
 
 export const buildLogger = (settings: Settings): Logger => {
     const options = settings.getTyped('log');
-    const rotation = options.rotation;
+
+    let transportStreams: TransportStream[] = [
+        new transports.Console({
+            format: combine(align(), printf(formatter), colorize({ all: true })),
+        }),
+    ];
+
+    if (settings.getTyped('app').env !== 'production') {
+        transportStreams.push(new DailyRotateFile({ ...options.rotation, level: levels.info }));
+        transportStreams.push(
+            new DailyRotateFile({
+                ...(options.rotation as any), // eslint-disable-line @typescript-eslint/no-explicit-any
+                filename: 'error-%DATE%.log',
+                level: levels.error,
+            })
+        );
+    }
 
     const logger = createLogger({
         defaultMeta: settings.getTyped('app'),
@@ -18,17 +35,7 @@ export const buildLogger = (settings: Settings): Logger => {
         handleExceptions: true,
         level: options.level,
         levels: config.syslog.levels,
-        transports: [
-            new transports.Console({
-                format: combine(align(), printf(formatter), colorize({ all: true })),
-            }),
-            new DailyRotateFile({ ...rotation, level: levels.info }),
-            new DailyRotateFile({
-                ...(rotation as any), // eslint-disable-line @typescript-eslint/no-explicit-any
-                filename: 'error-%DATE%.log',
-                level: levels.error,
-            }),
-        ],
+        transports: transportStreams,
     });
 
     addColors(config.syslog.colors);
