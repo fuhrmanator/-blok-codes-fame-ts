@@ -1,0 +1,24 @@
+# ide
+.editorconfig
+.idea/
+.vscode/
+.history/
+
+# mac references
+.DS_Store
+
+# lib
+/lib/node_modules/
+/lib/Famix-Traits/
+/lib/FamixReplication/
+/lib/FamixTypeScript/
+/lib/helpers/
+/lib/Moose/
+/lib/Moose-Query/
+/lib/Tagging/
+/lib/BaseElement.ts
+/lib/Decorators.ts
+/lib/FamixBaseElement.ts
+/lib/FamixJSONExporter.ts
+/lib/FamixRepository.ts
+/lib/SetWithOpposite.ts

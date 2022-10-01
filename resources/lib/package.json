@@ -1,0 +1,25 @@
+{
+    "name": "@blok-codes/famix",
+    "description": "Famix model generated from TypeScript",
+    "version": "1.2.0",
+    "author": "Jude Seide <jude.seide@gmail.com> (https://www.linkedin.com/in/judeseide/)",
+    "homepage": "https://github.com/blok-codes/-blok-codes-fame-ts/resources#readme",
+    "license": "GPL-3.0-or-later",
+    "private": false,
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:blok-codes/-blok-codes-fame-ts.git"
+    },
+    "bugs": {
+        "url": "https://github.com/blok-codes/-blok-codes-fame-ts/issues"
+    },
+    "files": [
+        "*"
+    ],
+    "devDependencies": {
+        "typescript": "^4.7.3"
+    },
+    "engines": {
+        "node": ">=16"
+    }
+}
