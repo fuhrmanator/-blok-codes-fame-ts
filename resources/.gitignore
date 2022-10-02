@@ -8,6 +8,7 @@
 .DS_Store
 
 # lib
+/lib/dist/
 /lib/node_modules/
 /lib/Famix-Traits/
 /lib/FamixReplication/
