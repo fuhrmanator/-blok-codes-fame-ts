@@ -1,5 +1,5 @@
 .eslintrc.js
-jest.config.js
+jest.config.ts
 /tests
 /config
 node_modules
@@ -7,3 +7,4 @@ dist
 logs
 coverage
 app/Services/generated
+resources
