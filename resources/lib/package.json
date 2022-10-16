@@ -1,7 +1,7 @@
 {
     "name": "@blok-codes/famix",
     "description": "Famix model generated from TypeScript",
-    "version": "1.3.3",
+    "version": "1.4.0",
     "author": "Jude Seide <jude.seide@gmail.com> (https://www.linkedin.com/in/judeseide/)",
     "homepage": "https://github.com/blok-codes/-blok-codes-fame-ts/resources#readme",
     "license": "GPL-3.0-or-later",

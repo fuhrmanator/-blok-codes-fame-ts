@@ -25,6 +25,10 @@ export const addFamixJSONExporterImportDeclaration = (source: SourceFile): void 
     addNamedImportDeclaration(source, 'FamixJSONExporter', '../FamixJSONExporter');
 };
 
+export const addFamixBaseElementImportDeclaration = (source: SourceFile): void => {
+    addNamedImportDeclaration(source, 'FamixBaseElement', '../FamixBaseElement');
+};
+
 export const addSetWithOppositeImportDeclaration = (source: SourceFile): void => {
     addNamedImportDeclaration(source, 'SetWithOpposite', '../SetWithOpposite');
 };

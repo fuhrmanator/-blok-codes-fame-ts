@@ -1,6 +1,6 @@
-import { FamixRepository } from '../../resources/generated/FamixRepository';
-import { Class } from '../../resources/generated/FamixTypeScript/Class';
-import { ScopingEntity } from '../../resources/generated/FamixTypeScript/ScopingEntity';
+import { FamixRepository } from '../../resources/lib/FamixRepository';
+import { Class } from '../../resources/lib/FamixTypeScript/Class';
+import { ScopingEntity } from '../../resources/lib/FamixTypeScript/ScopingEntity';
 
 describe('FamixRepository', () => {
     let repo: FamixRepository;

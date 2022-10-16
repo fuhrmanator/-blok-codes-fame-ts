@@ -1,5 +1,8 @@
 # Issues
 
+## FamixRepository
+- [] cannot find function from namespace
+
 ## Known issues with inheritance and implementation of interfaces
 - [x] ~~resources/generated/FamixTypeScript/\*.ts - Class '(.\*)' incorrectly implements interface 'T(.\*)'.~~
 - [x] ~~resources/generated/Moose/Model.ts - Class 'Model' incorrectly extends base class 'AbstractGroup'. Types have separate declarations of a private property '_numberOfLinesOfCode'.~~

@@ -7,6 +7,7 @@ import { Logger } from 'winston';
 import { Class, Property, RefEnum, TypescriptMetaModel } from './generated/TypescriptMetaModel';
 import {
     addFamePropertyImportDeclaration,
+    addFamixBaseElementImportDeclaration,
     addFamixJSONExporterImportDeclaration,
     addNamedImportDeclaration,
     addSetWithOppositeImportDeclaration,
@@ -106,7 +107,8 @@ export class CodeGenerator {
         });
 
         if (clazz.name === 'BaseObject') {
-            classDeclaration.setExtends('Object'); // Extends TypeScript's built-in Object class
+            classDeclaration.setExtends('FamixBaseElement');
+            addFamixBaseElementImportDeclaration(source);
         }
 
         const addPropertiesToExporterStatements: string[] = [];

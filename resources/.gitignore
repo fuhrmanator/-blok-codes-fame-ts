@@ -17,9 +17,3 @@
 /lib/Moose/
 /lib/Moose-Query/
 /lib/Tagging/
-/lib/BaseElement.ts
-/lib/Decorators.ts
-/lib/FamixBaseElement.ts
-/lib/FamixJSONExporter.ts
-/lib/FamixRepository.ts
-/lib/SetWithOpposite.ts

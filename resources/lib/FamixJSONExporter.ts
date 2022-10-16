@@ -1,15 +1,10 @@
-import { BaseElement } from './BaseElement';
-import { isInstanceOf } from './helpers';
-
-interface FamixElement extends BaseElement {
-    id?: number;
-}
+import { FamixBaseElement } from './FamixBaseElement';
 
 export class FamixJSONExporter {
-    private element: FamixElement;
+    private element: FamixBaseElement;
     private readonly buffer: Record<string, unknown>;
 
-    constructor(clazz: string, element: FamixElement) {
+    constructor(clazz: string, element: FamixBaseElement) {
         this.element = element;
 
         this.buffer = {
@@ -25,7 +20,7 @@ export class FamixJSONExporter {
 
         if (value instanceof Set) {
             this.buffer[name] = this.addPropertiesFromSet(value);
-        } else if (this.isFamixElement(value)) {
+        } else if (value instanceof FamixBaseElement) {
             this.buffer[name] = { ref: value.id };
         } else if (typeof value === 'string') {
             this.buffer[name] = value;
@@ -40,7 +35,7 @@ export class FamixJSONExporter {
         set.forEach((value) => {
             if (typeof value === 'string') {
                 properties.push(value);
-            } else if (this.isFamixElement(value)) {
+            } else if (value instanceof FamixBaseElement) {
                 properties.push({ ref: value.id });
             } else {
                 properties.push(value);
@@ -51,8 +46,4 @@ export class FamixJSONExporter {
     };
 
     public readonly toJSON = (): string => JSON.stringify(this.buffer);
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    private readonly isFamixElement = (value: any): value is FamixElement =>
-        isInstanceOf<FamixElement>(value, ['toJSON', 'addPropertiesToExporter']);
 }

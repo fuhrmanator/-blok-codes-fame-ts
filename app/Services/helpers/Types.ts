@@ -15,3 +15,6 @@ export const toTsType = (type: string): string => {
             return type;
     }
 };
+
+export const isTypeOf = <T>(instance: T): instance is T =>
+    Object.keys(instance).every((property) => property in instance);

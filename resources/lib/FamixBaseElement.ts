@@ -1,8 +1,7 @@
-import { BaseElement } from './BaseElement';
 import { FamixJSONExporter } from './FamixJSONExporter';
 import { FamixRepository } from './FamixRepository';
 
-export abstract class FamixBaseElement implements BaseElement {
+export abstract class FamixBaseElement {
     id: number | undefined;
 
     constructor(repository: FamixRepository) {

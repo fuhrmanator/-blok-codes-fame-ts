@@ -2,7 +2,7 @@ import { Container } from 'inversify';
 import 'reflect-metadata';
 import { Logger } from 'winston';
 import { UtilityProvider } from '../../../app/Providers/UtilityProvider';
-import { isTypeOf } from '../../../app/Services/famix/helpers';
+import { isTypeOf } from '../../../app/Services/helpers';
 import { ProcessHandler } from '../../../app/Utils/ProcessHandler';
 import { Settings } from '../../../config/Settings';
 
