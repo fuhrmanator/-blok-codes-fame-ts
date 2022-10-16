@@ -2,7 +2,15 @@ import { FamixJSONExporter } from './FamixJSONExporter';
 import { FamixRepository } from './FamixRepository';
 
 export abstract class FamixBaseElement {
-    id: number | undefined;
+    private identifier?: number;
+
+    get id(): number {
+        return this.identifier;
+    }
+
+    set id(value: number | undefined) {
+        this.identifier = value;
+    }
 
     constructor(repository: FamixRepository) {
         repository.addElement(this);
