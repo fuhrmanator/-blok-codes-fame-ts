@@ -5,8 +5,6 @@ export abstract class FamixRepository<T = FamixBaseElement> {
 
     protected abstract counter: number;
 
-    protected constructor() {}
-
     abstract getInstance(): FamixRepository<T>;
 
     abstract clear(): void;
