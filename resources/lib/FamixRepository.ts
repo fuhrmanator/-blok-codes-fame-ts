@@ -1,15 +1,15 @@
 import { FamixBaseElement } from './FamixBaseElement';
 
-export abstract class FamixRepository<T = FamixBaseElement> {
-    protected abstract readonly records: Record<string, T>;
+export abstract class FamixRepository {
+    protected abstract readonly records: Record<string, unknown>;
 
     protected abstract counter: number;
 
-    abstract getInstance(): FamixRepository<T>;
+    abstract getInstance(): FamixRepository;
 
     abstract clear(): void;
 
     abstract toJSON(): string;
 
-    abstract addElement(element: T): void;
+    abstract addElement(element: FamixBaseElement): void;
 }
