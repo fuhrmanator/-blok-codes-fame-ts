@@ -18,5 +18,5 @@ export abstract class FamixBaseElement {
 
     abstract toJSON(): string;
 
-    abstract addPropertiesToExporter(exporter: FamixJSONExporter): void;
+    addPropertiesToExporter(exporter: FamixJSONExporter): void {}
 }

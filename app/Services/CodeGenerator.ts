@@ -63,7 +63,8 @@ export class CodeGenerator {
         this.logger.info(`Class: ${clazz.name}`);
 
         const packageName = this.reference.getEntityName(clazz.package.ref);
-        const isSuperClass = clazz.superclass !== undefined && (packageName !== 'Moose' || clazz.name !== 'BaseObject');
+        const hasSuperClass =
+            clazz.superclass !== undefined && (packageName !== 'Moose' || clazz.name !== 'BaseObject');
 
         const classDeclaration = source.addClass({
             isExported: true,
@@ -73,7 +74,7 @@ export class CodeGenerator {
         let traits = clazz.traits;
         let properties = uniqWith(clazz.properties || [], (a, b) => a.name === b.name);
 
-        if (isSuperClass) {
+        if (hasSuperClass) {
             this.acceptSuperclass(clazz, source, classDeclaration);
 
             let superclass = clazz.superclass;
@@ -112,7 +113,7 @@ export class CodeGenerator {
         }
 
         addFamixJSONExporterImportDeclaration(source);
-        const addPropertiesToExporterStatements: string[] = isSuperClass
+        const addPropertiesToExporterStatements: string[] = hasSuperClass
             ? ['super.addPropertiesToExporter(exporter);']
             : [];
 
