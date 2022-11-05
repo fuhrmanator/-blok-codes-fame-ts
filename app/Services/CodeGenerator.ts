@@ -1,6 +1,6 @@
 import assert from 'assert';
 import { inject, injectable } from 'inversify';
-import { camelCase, uniq, uniqWith } from 'lodash';
+import { camelCase, uniqWith } from 'lodash';
 import { ClassDeclaration, InterfaceDeclaration, Project, Scope, SourceFile } from 'ts-morph';
 import { Logger } from 'winston';
 
@@ -61,7 +61,9 @@ export class CodeGenerator {
 
     private readonly acceptClass = (clazz: Class, source: SourceFile): void => {
         this.logger.info(`Class: ${clazz.name}`);
+
         const packageName = this.reference.getEntityName(clazz.package.ref);
+        const isSuperClass = clazz.superclass !== undefined && (packageName !== 'Moose' || clazz.name !== 'BaseObject');
 
         const classDeclaration = source.addClass({
             isExported: true,
@@ -69,9 +71,9 @@ export class CodeGenerator {
         });
 
         let traits = clazz.traits;
-        let properties = uniqWith(clazz.properties, (a, b) => a.name === b.name);
+        let properties = uniqWith(clazz.properties || [], (a, b) => a.name === b.name);
 
-        if (clazz.superclass !== undefined && (packageName !== 'Moose' || clazz.name !== 'BaseObject')) {
+        if (isSuperClass) {
             this.acceptSuperclass(clazz, source, classDeclaration);
 
             let superclass = clazz.superclass;
@@ -99,11 +101,9 @@ export class CodeGenerator {
             classDeclaration.addImplements(this.addImportDeclaration(trait.ref, source));
             const entity = this.reference.getEntity(trait.ref) as Class;
 
-            uniqWith(entity.properties, (a, b) => a.name === b.name)
-                ?.sort((a, b) => a.name.localeCompare(b.name))
-                .forEach((property) => {
-                    this.acceptProperty(property, source, classDeclaration);
-                });
+            uniqWith(entity.properties || [], (a, b) => a.name === b.name)
+                .sort((a, b) => a.name.localeCompare(b.name))
+                .forEach((property) => properties.push(property));
         });
 
         if (clazz.name === 'BaseObject') {
@@ -111,11 +111,13 @@ export class CodeGenerator {
             addFamixBaseElementImportDeclaration(source);
         }
 
-        const addPropertiesToExporterStatements: string[] = [];
         addFamixJSONExporterImportDeclaration(source);
+        const addPropertiesToExporterStatements: string[] = isSuperClass
+            ? ['super.addPropertiesToExporter(exporter);']
+            : [];
 
-        properties
-            ?.sort((a, b) => a.name.localeCompare(b.name))
+        uniqWith(properties, (a, b) => a.name === b.name)
+            .sort((a, b) => a.name.localeCompare(b.name))
             .forEach((property) => {
                 this.acceptProperty(property, source, classDeclaration);
 
@@ -127,7 +129,7 @@ export class CodeGenerator {
         classDeclaration.addMethod({
             name: 'addPropertiesToExporter',
             parameters: [{ name: 'exporter', type: 'FamixJSONExporter' }],
-            statements: uniq(addPropertiesToExporterStatements),
+            statements: addPropertiesToExporterStatements,
         });
 
         classDeclaration.addMethod({

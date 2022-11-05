@@ -1,6 +1,6 @@
 {
     "name": "@blok-codes/fame-ts",
-    "version": "1.3.0",
+    "version": "1.4.0",
     "description": "convert typescript meta-model from json to an api",
     "author": "Jude Seide <jude.seide@gmail.com> (https://www.linkedin.com/in/judeseide/)",
     "homepage": "https://github.com/blok-codes/-blok-codes-fame-ts#readme",
